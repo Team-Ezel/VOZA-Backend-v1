@@ -3,6 +3,7 @@ package com.ezel.voza.global.security.jwt;
 import com.ezel.voza.global.security.jwt.properties.JwtProperties;
 import com.ezel.voza.global.security.jwt.properties.TokenTimeProperties;
 import io.jsonwebtoken.*;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.time.ZonedDateTime;
 import java.util.Date;
