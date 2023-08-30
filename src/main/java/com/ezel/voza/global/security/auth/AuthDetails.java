@@ -25,8 +25,12 @@ public class AuthDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return user.getNickName();
     }
+
+    public String getEmail() { return user.getEmail(); }
+
+    public String getProfileUrl() { return user.getProfileUrl(); }
 
     @Override
     public boolean isAccountNonExpired() {
