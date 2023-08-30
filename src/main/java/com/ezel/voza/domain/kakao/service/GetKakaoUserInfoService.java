@@ -11,6 +11,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 @Component
@@ -33,7 +37,7 @@ public class GetKakaoUserInfoService {
                 .retrieve()
                 .bodyToFlux(KakaoUserInfoResponse.class);
 
-        KakaoToken kakaoToken = new KakaoToken(response.blockFirst().getId(), kakaoTokenResponse.getAccess_token());
+        KakaoToken kakaoToken = new KakaoToken(response.blockFirst().getId(), kakaoTokenResponse.getAccess_token(), getKakaoExpressTime(kakaoTokenResponse.getRefresh_token_expires_in()));
         kakaoTokenRepository.save(kakaoToken);
 
         SignUpRequest signUpRequest = SignUpRequest.builder()
@@ -45,5 +49,10 @@ public class GetKakaoUserInfoService {
         userSignupService.execute(signUpRequest);
 
         return response.blockFirst();
+    }
+
+    private static ZonedDateTime getKakaoExpressTime(Integer time) {
+        Instant expirationInstant = Instant.now().plus(time, ChronoUnit.SECONDS);
+        return expirationInstant.atZone(ZoneId.of("UTC"));
     }
 }

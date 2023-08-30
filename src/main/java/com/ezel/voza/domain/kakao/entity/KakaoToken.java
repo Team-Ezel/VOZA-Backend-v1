@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.TimeToLive;
+
+import java.time.ZonedDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -16,6 +19,9 @@ public class KakaoToken {
 
     @Id
     private Long userId;
-
     private String accessToken;
+
+    @TimeToLive
+    private ZonedDateTime timeToLive;
+
 }
