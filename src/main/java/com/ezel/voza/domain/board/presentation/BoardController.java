@@ -2,8 +2,8 @@ package com.ezel.voza.domain.board.presentation;
 
 import com.ezel.voza.domain.board.presentation.dto.request.CreateBoardRequest;
 import com.ezel.voza.domain.board.presentation.dto.response.ListBoardResponse;
-import com.ezel.voza.domain.board.service.impl.CreateBoardServiceImpl;
-import com.ezel.voza.domain.board.service.impl.ListBoardServiceImpl;
+import com.ezel.voza.domain.board.service.CreateBoardService;
+import com.ezel.voza.domain.board.service.ListBoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/board")
 public class BoardController {
 
-    private final CreateBoardServiceImpl createBoardService;
+    private final CreateBoardService createBoardService;
 
-    private final ListBoardServiceImpl listBoardService;
+    private final ListBoardService listBoardService;
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
