@@ -5,7 +5,7 @@ import com.ezel.voza.domain.board.entity.enums.BoardType;
 import com.ezel.voza.domain.board.presentation.dto.request.CreateBoardRequest;
 import com.ezel.voza.domain.board.repository.BoardRepository;
 import com.ezel.voza.domain.board.service.CreateBoardService;
-import com.ezel.voza.domain.member.entity.User;
+import com.ezel.voza.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
