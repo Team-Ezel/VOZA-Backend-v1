@@ -4,8 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
-@Builder
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateBoardRequest {
 
     @NotBlank(message = "제목은 필수입니다.")
