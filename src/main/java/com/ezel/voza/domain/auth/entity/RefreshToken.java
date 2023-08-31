@@ -1,4 +1,4 @@
-package com.ezel.voza.domain.kakao.entity;
+package com.ezel.voza.domain.auth.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,19 +13,19 @@ import org.springframework.data.redis.core.index.Indexed;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@RedisHash("KakaoToken")
-public class KakaoToken {
+@RedisHash(value = "refreshToken")
+public class RefreshToken {
 
     @Id
-    private Long userId;
-
-    @Indexed
-    private String accessToken;
+    private String email;
 
     @Indexed
     private String refreshToken;
 
     @TimeToLive
-    private Long timeToLive;
+    private Long expiredAt;
 
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }

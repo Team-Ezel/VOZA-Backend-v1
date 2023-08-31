@@ -37,7 +37,7 @@ public class GetKakaoUserInfoService {
                 .retrieve()
                 .bodyToFlux(KakaoUserInfoResponse.class);
 
-        KakaoToken kakaoToken = new KakaoToken(response.blockFirst().getId(), kakaoTokenResponse.getAccess_token(), getKakaoExpressTime(kakaoTokenResponse.getRefresh_token_expires_in()));
+        KakaoToken kakaoToken = new KakaoToken(response.blockFirst().getId(), kakaoTokenResponse.getAccess_token(), kakaoTokenResponse.getRefresh_token(), kakaoTokenResponse.getExpires_in().longValue());
         kakaoTokenRepository.save(kakaoToken);
 
         SignUpRequest signUpRequest = SignUpRequest.builder()
@@ -49,10 +49,5 @@ public class GetKakaoUserInfoService {
         userSignupService.execute(signUpRequest);
 
         return response.blockFirst();
-    }
-
-    private static ZonedDateTime getKakaoExpressTime(Integer time) {
-        Instant expirationInstant = Instant.now().plus(time, ChronoUnit.SECONDS);
-        return expirationInstant.atZone(ZoneId.of("UTC"));
     }
 }
