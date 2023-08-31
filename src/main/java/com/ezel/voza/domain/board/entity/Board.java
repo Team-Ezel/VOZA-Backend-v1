@@ -1,6 +1,7 @@
 package com.ezel.voza.domain.board.entity;
 
 import com.ezel.voza.domain.board.entity.enums.BoardType;
+import com.ezel.voza.domain.board.presentation.dto.request.UpdateBoardRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -38,4 +39,8 @@ public class Board {
     @LastModifiedDate
     private LocalDateTime editedDate;
 
+    public void update(UpdateBoardRequest updateBoardRequest) {
+        this.title = updateBoardRequest.getTitle();
+        this.content = updateBoardRequest.getContent();
+    }
 }
