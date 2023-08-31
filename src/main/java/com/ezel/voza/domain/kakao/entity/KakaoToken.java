@@ -7,8 +7,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.TimeToLive;
-
-import java.time.ZonedDateTime;
+import org.springframework.data.redis.core.index.Indexed;
 
 @Getter
 @NoArgsConstructor
@@ -19,9 +18,14 @@ public class KakaoToken {
 
     @Id
     private Long userId;
+
+    @Indexed
     private String accessToken;
 
+    @Indexed
+    private String refreshToken;
+
     @TimeToLive
-    private ZonedDateTime timeToLive;
+    private Long timeToLive;
 
 }
