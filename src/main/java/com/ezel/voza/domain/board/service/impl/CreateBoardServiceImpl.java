@@ -19,6 +19,7 @@ public class CreateBoardServiceImpl implements CreateBoardService {
     private final UserUtil util;
     private final BoardRepository boardRepository;
 
+    @Override
     public void execute(CreateBoardRequest createBoardRequest) {
 
         User user = util.currentUser();
