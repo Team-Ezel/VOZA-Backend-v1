@@ -6,6 +6,7 @@ import com.ezel.voza.domain.board.presentation.dto.request.CreateBoardRequest;
 import com.ezel.voza.domain.board.repository.BoardRepository;
 import com.ezel.voza.domain.board.service.CreateBoardService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,12 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class CreateBoardServiceImpl implements CreateBoardService {
 
-    private final User user;
-
+    private final UserUtil util;
     private final BoardRepository boardRepository;
 
     public void execute(CreateBoardRequest createBoardRequest) {
+
+        User user = util.currentUser();
 
         Board board = Board.builder()
                 .title(createBoardRequest.getTitle())

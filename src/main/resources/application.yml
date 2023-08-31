@@ -5,6 +5,9 @@ spring:
       max-request-size: 10MB
       enabled: true
 
+  main:
+    allow-bean-definition-overriding: 'true'
+
   security:
     oauth2:
       client:
@@ -43,16 +46,16 @@ spring:
 
     main:
       allow-bean-definition-overriding: 'true'
-    data:
-      redis:
-        host: ${R_HOST}
-        port: ${R_PORT}
+  data:
+    redis:
+      host: ${R_HOST}
+      port: ${R_PORT}
 
-  jwt:
-    accessSecret: ${ACCESS_SECRET}
-    refreshSecret: ${REFRESH_SECRET}
-    accessTime: ${ACCESS_TIME}
-    refreshTime: ${REFRESH_TIME}
+jwt:
+  accessSecret: ${ACCESS_SECRET}
+  refreshSecret: ${REFRESH_SECRET}
+  accessTime: ${ACCESS_TIME}
+  refreshTime: ${REFRESH_TIME}
 
 server:
   port: 9088
