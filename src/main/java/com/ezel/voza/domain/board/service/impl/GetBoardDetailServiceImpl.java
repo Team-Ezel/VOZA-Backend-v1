@@ -16,7 +16,7 @@ public class GetBoardDetailServiceImpl {
 
         Board board = boardUtil.findBoardById(id);
 
-        DetailBoardResponse detailBoardResponse = DetailBoardResponse.builder()
+        return DetailBoardResponse.builder()
                 .id(board.getId())
                 .title(board.getTitle())
                 .content(board.getContent())
@@ -24,7 +24,5 @@ public class GetBoardDetailServiceImpl {
                 .createdDate(board.getCreatedDate())
                 .editedDate(board.getEditedDate())
                 .build();
-
-        return detailBoardResponse;
     }
 }
