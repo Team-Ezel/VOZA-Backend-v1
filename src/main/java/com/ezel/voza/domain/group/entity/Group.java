@@ -42,9 +42,13 @@ public class Group {
     private Set<String> tags = new HashSet<>();
 
     @ElementCollection
-    @CollectionTable(name="study_group_member", joinColumns = @JoinColumn(name= "study_group_id", referencedColumnName = "id"))
+    @CollectionTable(name="study_group_member", joinColumns = @JoinColumn(name= "group_id"))
     @Column(name = "users")
     @Size(max = 30)
     @NotEmpty
     private HashMap<User, String> members = new HashMap<>();
+
+    public void putMember(User user, String role) {
+        members.put(user, role);
+    }
 }
