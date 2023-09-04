@@ -38,7 +38,5 @@ public class CreateGroupServiceImpl implements CreateGroupService {
         group.putMember(user, "Leader");
 
         groupRepository.save(group);
-
-        groupRepository.save(group);
     }
 }
