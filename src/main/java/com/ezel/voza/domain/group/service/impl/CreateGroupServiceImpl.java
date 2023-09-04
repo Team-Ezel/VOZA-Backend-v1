@@ -34,7 +34,7 @@ public class CreateGroupServiceImpl implements CreateGroupService {
                 .tags(new HashSet<>(createGroupRequest.getTags()))
                 .members(new HashMap<>())
                 .build();
-    
+
         group.putMember(user, "Leader");
 
         groupRepository.save(group);
