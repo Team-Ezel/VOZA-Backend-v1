@@ -30,7 +30,6 @@ public class DeleteBoardServiceImpl implements DeleteBoardService {
         User user = userUtil.currentUser();
 
         if(!(Objects.equals(board.getAuthor(), user.getNickName()))) {
-
             throw new BoardAuthorMismatchException();
         }
 
