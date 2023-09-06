@@ -32,7 +32,11 @@ public enum ErrorCode {
 
     //MEMBER
     MEMBER_NOT_FOUND("회원을 찾을 수 없습니다", 404),
-    NOT_MANAGER("관리자 권한이 없습니다.", 403);
+    NOT_MANAGER("관리자 권한이 없습니다.", 403),
+
+    //GROUP
+    GROUP_NOT_FOUND("그룹을 찾을 수 없습니다", 404),
+    NOT_LEADER("그룹 리더가 없습니다.", 403);
 
     private final String message;
     private final int status;
