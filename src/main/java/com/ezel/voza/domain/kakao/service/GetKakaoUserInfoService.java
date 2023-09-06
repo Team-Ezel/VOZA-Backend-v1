@@ -43,7 +43,7 @@ public class GetKakaoUserInfoService {
         KakaoToken kakaoToken = new KakaoToken(response.blockFirst().getId(), kakaoTokenResponse.getAccess_token(), kakaoTokenResponse.getRefresh_token(), kakaoTokenResponse.getExpires_in().longValue());
         kakaoTokenRepository.save(kakaoToken);
 
-        if (!userRepository.existByEmail(Objects.requireNonNull(response.blockFirst()).getKakao_account().getEmail())) {
+        if (!userRepository.existsByEmail(Objects.requireNonNull(response.blockFirst()).getKakao_account().getEmail())) {
             SignUpRequest signUpRequest = SignUpRequest.builder()
                     .email(Objects.requireNonNull(response.blockFirst()).getKakao_account().getEmail())
                     .profileUrl(Objects.requireNonNull(response.blockFirst()).getKakao_account().getProfile().getProfile_image_url())
