@@ -25,5 +25,5 @@ public class GroupInvite {
     private UUID groupId;
 
     @TimeToLive
-    private Long expiredAt;
+    private Long expiresIn;
 }
