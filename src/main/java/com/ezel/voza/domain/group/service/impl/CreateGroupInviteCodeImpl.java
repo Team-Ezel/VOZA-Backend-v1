@@ -23,6 +23,7 @@ public class CreateGroupInviteCodeImpl implements CreateGroupInviteCode {
     private final GroupRepository groupRepository;
     private final GroupInviteRepository groupInviteRepository;
     private final UserUtil util;
+    private static final long expiresAt = 60 * 60;
 
     @Override
     public String generateInviteCode(UUID groupId) {
@@ -41,7 +42,7 @@ public class CreateGroupInviteCodeImpl implements CreateGroupInviteCode {
 
         String inviteCode = String.format("%06d", randomCode);
 
-        GroupInvite groupInvite = new GroupInvite(user.getEmail(), inviteCode, groupId);
+        GroupInvite groupInvite = new GroupInvite(user.getEmail(), inviteCode, groupId, expiresAt);
         groupInviteRepository.save(groupInvite);
 
         return inviteCode;
