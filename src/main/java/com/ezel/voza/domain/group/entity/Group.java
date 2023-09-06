@@ -9,7 +9,7 @@ import lombok.*;
 import java.util.*;
 
 @Entity
-@Table(name = "Group", indexes = {
+@Table(name = "meeting", indexes = {
         @Index(name = "idx_group_region", columnList = "region")
 })
 @NoArgsConstructor
@@ -42,7 +42,7 @@ public class Group {
     private Set<String> tags = new HashSet<>();
 
     @ElementCollection
-    @CollectionTable(name="study_group_member", joinColumns = @JoinColumn(name= "group_id"))
+    @CollectionTable(name="group_member", joinColumns = @JoinColumn(name= "group_id"))
     @Column(name = "users")
     @Size(max = 30)
     @NotEmpty
