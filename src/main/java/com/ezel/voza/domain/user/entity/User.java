@@ -17,10 +17,10 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(nullable = true)
+    @Column(nullable = true, unique = true)
     private String email;
 
-    @Column(name = "profileUrl")
+    @Column(name = "profileUrl", unique = true)
     private String profileUrl;
 
     @Column(name = "name")

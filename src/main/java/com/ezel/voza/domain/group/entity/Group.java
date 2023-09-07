@@ -42,11 +42,12 @@ public class Group {
     private Set<String> tags = new HashSet<>();
 
     @ElementCollection
-    @CollectionTable(name="group_member", joinColumns = @JoinColumn(name= "group_id"))
-    @Column(name = "users")
-    @Size(max = 30)
+    @CollectionTable(name = "group_member", joinColumns = @JoinColumn(name = "group_id"))
+    @MapKeyJoinColumn(name = "user_id")
+    @Column(name = "role")
     @NotEmpty
-    private HashMap<User, String> members = new HashMap<>();
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 또는 다른 적절한 전략 선택
+    private Map<User, String> members = new HashMap<>();
 
     public void putMember(User user, String role) {
         members.put(user, role);
