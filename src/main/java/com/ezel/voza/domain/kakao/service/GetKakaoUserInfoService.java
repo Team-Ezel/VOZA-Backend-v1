@@ -4,7 +4,6 @@ import com.ezel.voza.domain.kakao.entity.KakaoToken;
 import com.ezel.voza.domain.kakao.presentation.dto.response.KakaoTokenResponse;
 import com.ezel.voza.domain.kakao.presentation.dto.response.KakaoUserInfoResponse;
 import com.ezel.voza.domain.kakao.repository.KakaoTokenRepository;
-import com.ezel.voza.domain.user.entity.User;
 import com.ezel.voza.domain.user.presentation.dto.request.SignUpRequest;
 import com.ezel.voza.domain.user.repository.UserRepository;
 import com.ezel.voza.domain.user.service.UserSignupService;
@@ -13,10 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 @Component
@@ -31,28 +26,50 @@ public class GetKakaoUserInfoService {
     private final UserRepository userRepository;
 
     public KakaoUserInfoResponse getUserInfo(String code) {
-
         KakaoTokenResponse kakaoTokenResponse = getKakaoTokenService.execute(code);
+        Flux<KakaoUserInfoResponse> response = fetchKakaoUserInfo(kakaoTokenResponse.getAccess_token());
 
-        Flux<KakaoUserInfoResponse> response = webClient.get()
-                .uri(USER_INFO_URI)
-                .header("Authorization", "Bearer " + kakaoTokenResponse.getAccess_token())
-                .retrieve()
-                .bodyToFlux(KakaoUserInfoResponse.class);
-
-        KakaoToken kakaoToken = new KakaoToken(response.blockFirst().getId(), kakaoTokenResponse.getAccess_token(), kakaoTokenResponse.getRefresh_token(), kakaoTokenResponse.getExpires_in().longValue());
-        kakaoTokenRepository.save(kakaoToken);
-
-        if (!userRepository.existsByEmail(Objects.requireNonNull(response.blockFirst()).getKakao_account().getEmail())) {
-            SignUpRequest signUpRequest = SignUpRequest.builder()
-                    .email(Objects.requireNonNull(response.blockFirst()).getKakao_account().getEmail())
-                    .profileUrl(Objects.requireNonNull(response.blockFirst()).getKakao_account().getProfile().getProfile_image_url())
-                    .nickName(Objects.requireNonNull(response.blockFirst()).getKakao_account().getProfile().getNickname())
-                    .build();
-
+        String email = getEmailFromResponse(response);
+        if (email != null && !userRepository.existsByEmail(email)) {
+            SignUpRequest signUpRequest = buildSignUpRequest(response, email);
             userSignupService.execute(signUpRequest);
         }
-        
+
+        saveKakaoToken(kakaoTokenResponse, Objects.requireNonNull(response.blockFirst()));
+
         return response.blockFirst();
     }
+
+    private Flux<KakaoUserInfoResponse> fetchKakaoUserInfo(String accessToken) {
+        return webClient.get()
+                .uri(USER_INFO_URI)
+                .header("Authorization", "Bearer " + accessToken)
+                .retrieve()
+                .bodyToFlux(KakaoUserInfoResponse.class);
+    }
+
+    private String getEmailFromResponse(Flux<KakaoUserInfoResponse> response) {
+        KakaoUserInfoResponse userInfo = response.blockFirst();
+        return userInfo != null ? userInfo.getKakao_account().getEmail() : null;
+    }
+
+    private void saveKakaoToken(KakaoTokenResponse kakaoTokenResponse, KakaoUserInfoResponse userInfo) {
+        KakaoToken kakaoToken = new KakaoToken(
+                userInfo.getId(),
+                kakaoTokenResponse.getAccess_token(),
+                kakaoTokenResponse.getRefresh_token(),
+                kakaoTokenResponse.getExpires_in().longValue()
+        );
+        kakaoTokenRepository.save(kakaoToken);
+    }
+
+    private SignUpRequest buildSignUpRequest(Flux<KakaoUserInfoResponse> response, String email) {
+        KakaoUserInfoResponse userInfo = response.blockFirst();
+        return SignUpRequest.builder()
+                .email(email)
+                .profileUrl(Objects.requireNonNull(userInfo).getKakao_account().getProfile().getProfile_image_url())
+                .nickName(userInfo.getKakao_account().getProfile().getNickname())
+                .build();
+    }
+
 }
