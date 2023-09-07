@@ -1,6 +1,7 @@
 package com.ezel.voza.domain.group.presentation.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,6 @@ public class CreateGroupRequest {
     @NotBlank(message = "지역은 필수 요소입니다.")
     private String region;
 
-    @NotBlank(message = "태그는 최소 한개이상 입력해야합니다.")
+    @NotEmpty(message = "태그는 최소 한개이상 입력해야합니다.")
     private List<String> tags;
 }
