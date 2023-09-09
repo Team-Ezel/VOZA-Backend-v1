@@ -38,7 +38,9 @@ public enum ErrorCode {
     GROUP_NOT_FOUND("그룹을 찾을 수 없습니다", 404),
     NOT_LEADER("그룹 리더가 없습니다.", 403),
     MISMATCH_INVITE_CODE("초대 코드가 올바르지 않습니다.", 403),
-    ALREADY_EXIST_GROUP("이미 그룹에 속해있습니다.", 403);
+    ALREADY_EXIST_GROUP("이미 그룹에 속해있습니다.", 403),
+    NOT_EXIST_GROUP("그 그룹에 속해있지않습니다.", 403),
+    LEADER_NOT_OUT_GROUP("리더는 그룹을 탈퇴할수없습니다.", 403);
 
     private final String message;
     private final int status;
