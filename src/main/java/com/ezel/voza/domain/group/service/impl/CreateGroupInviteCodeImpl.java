@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.Random;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +25,7 @@ public class CreateGroupInviteCodeImpl implements CreateGroupInviteCode {
     private static final long expiresAt = 60 * 60;
 
     @Override
-    public String generateInviteCode(UUID groupId) {
+    public String generateInviteCode(Long groupId) {
 
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(GroupNotFoundException::new);
