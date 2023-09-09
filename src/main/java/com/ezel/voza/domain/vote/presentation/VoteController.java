@@ -1,8 +1,9 @@
-package com.ezel.voza.domain.vote.presentation.dto;
+package com.ezel.voza.domain.vote.presentation;
 
 import com.ezel.voza.domain.vote.presentation.dto.request.CreateVoteRequest;
 import com.ezel.voza.domain.vote.presentation.dto.response.ListVoteResponse;
 import com.ezel.voza.domain.vote.service.CreateVoteService;
+import com.ezel.voza.domain.vote.service.DeleteVoteService;
 import com.ezel.voza.domain.vote.service.ListVoteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,16 +21,24 @@ public class VoteController {
 
     private final ListVoteService listVoteService;
 
+    private final DeleteVoteService deleteVoteService;
+
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody @Valid CreateVoteRequest createVoteRequest, @PathVariable UUID group_id) {
+    public ResponseEntity<Void> create(@RequestBody @Valid CreateVoteRequest createVoteRequest, @PathVariable Long group_id) {
         createVoteService.execute(createVoteRequest, group_id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
-    private ResponseEntity<ListVoteResponse> findAll(@PathVariable UUID group_id) {
+    public ResponseEntity<ListVoteResponse> findAll(@PathVariable UUID group_id) {
         var list = listVoteService.execute(group_id);
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        deleteVoteService.execute(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
