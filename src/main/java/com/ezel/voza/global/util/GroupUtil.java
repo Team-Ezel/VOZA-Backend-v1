@@ -6,15 +6,13 @@ import com.ezel.voza.domain.group.repository.GroupRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 @RequiredArgsConstructor
 public class GroupUtil {
 
     private final GroupRepository groupRepository;
 
-    public Group findGroupById(UUID id) {
+    public Group findGroupById(Long id) {
 
         return groupRepository.findById(id)
                 .orElseThrow(() -> new GroupNotFoundException());
