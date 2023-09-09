@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @RequiredArgsConstructor
 @RequestMapping("group/{group_id}/vote")
 public class VoteController {
@@ -30,7 +28,7 @@ public class VoteController {
     }
 
     @GetMapping
-    public ResponseEntity<ListVoteResponse> findAll(@PathVariable UUID group_id) {
+    public ResponseEntity<ListVoteResponse> findAll(@PathVariable Long group_id) {
         var list = listVoteService.execute(group_id);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }

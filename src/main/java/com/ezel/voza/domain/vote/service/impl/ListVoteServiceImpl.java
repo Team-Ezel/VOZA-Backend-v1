@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,7 +22,7 @@ public class ListVoteServiceImpl implements ListVoteService {
     private final GroupUtil groupUtil;
 
     @Override
-    public ListVoteResponse execute(UUID id){
+    public ListVoteResponse execute(Long id){
 
         Group group = groupUtil.findGroupById(id);
 
