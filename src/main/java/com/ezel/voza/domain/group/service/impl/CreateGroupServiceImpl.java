@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +25,6 @@ public class CreateGroupServiceImpl implements CreateGroupService {
         User user = util.currentUser();
 
         Group group = Group.builder()
-                .uuid(UUID.randomUUID())
                 .groupName(createGroupRequest.getGroupName())
                 .leaderName(user.getNickName())
                 .introduceGroup(createGroupRequest.getIntroduceGroup())

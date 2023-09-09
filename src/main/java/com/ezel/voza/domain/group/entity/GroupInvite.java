@@ -22,7 +22,7 @@ public class GroupInvite {
 
     private String inviteCode;
 
-    private UUID groupId;
+    private Long groupId;
 
     @TimeToLive
     private Long expiresIn;
