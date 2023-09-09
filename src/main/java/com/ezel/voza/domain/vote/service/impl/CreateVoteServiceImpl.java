@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +24,7 @@ public class CreateVoteServiceImpl implements CreateVoteService {
     private final GroupUtil groupUtil;
 
     @Override
-    public void execute(CreateVoteRequest createVoteRequest, UUID id) {
+    public void execute(CreateVoteRequest createVoteRequest, Long id) {
 
         User user = userUtil.currentUser();
 
