@@ -3,6 +3,7 @@ package com.ezel.voza.domain.vote.service.impl;
 import com.ezel.voza.domain.group.entity.Group;
 import com.ezel.voza.domain.vote.entity.Vote;
 import com.ezel.voza.domain.vote.presentation.dto.response.ListVoteResponse;
+import com.ezel.voza.domain.vote.presentation.dto.response.VoteResponse;
 import com.ezel.voza.domain.vote.repository.VoteRepository;
 import com.ezel.voza.domain.vote.service.ListVoteService;
 import com.ezel.voza.global.util.GroupUtil;
@@ -12,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
-import static com.ezel.voza.domain.vote.presentation.dto.response.VoteResponse.toResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +32,7 @@ public class ListVoteServiceImpl implements ListVoteService {
         ListVoteResponse listVoteResponse = ListVoteResponse.builder()
                 .voteList(
                         votes.stream()
-                                .map(vote -> toResponse(vote))
+                                .map(VoteResponse::toResponse)
                                 .collect(Collectors.toList())
                 )
                 .build();
