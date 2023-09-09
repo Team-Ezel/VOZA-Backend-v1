@@ -52,4 +52,6 @@ public class Group {
     public void putMember(User user, String role) {
         members.put(user, role);
     }
+
+    public void deleteMember(User user) { members.remove(user); }
 }
