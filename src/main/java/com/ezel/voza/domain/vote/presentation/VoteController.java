@@ -1,12 +1,10 @@
 package com.ezel.voza.domain.vote.presentation;
 
+import com.ezel.voza.domain.vote.presentation.dto.request.AddCountRequest;
 import com.ezel.voza.domain.vote.presentation.dto.request.CreateVoteRequest;
 import com.ezel.voza.domain.vote.presentation.dto.response.DetailVoteResponse;
 import com.ezel.voza.domain.vote.presentation.dto.response.ListVoteResponse;
-import com.ezel.voza.domain.vote.service.CreateVoteService;
-import com.ezel.voza.domain.vote.service.DeleteVoteService;
-import com.ezel.voza.domain.vote.service.GetVoteDetailService;
-import com.ezel.voza.domain.vote.service.ListVoteService;
+import com.ezel.voza.domain.vote.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +22,8 @@ public class VoteController {
     private final DeleteVoteService deleteVoteService;
 
     private final GetVoteDetailService getVoteDetailService;
+
+    private final AddCountService addCountService;
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateVoteRequest createVoteRequest, @PathVariable Long group_id) {
@@ -49,4 +49,9 @@ public class VoteController {
         return new ResponseEntity<>(oneFindById, HttpStatus.OK);
     }
 
+    @PatchMapping("/{vote_id}")
+    public ResponseEntity<Void> addCount(@PathVariable Long vote_id, @RequestBody @Valid AddCountRequest addCountRequest) {
+        addCountService.execute(vote_id, addCountRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
