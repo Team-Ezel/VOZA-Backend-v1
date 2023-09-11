@@ -20,7 +20,7 @@ public class User {
     @Column(nullable = true, unique = true)
     private String email;
 
-    @Column(name = "profileUrl", unique = true)
+    @Column(name = "profileUrl")
     private String profileUrl;
 
     @Column(name = "name")
