@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,8 +34,8 @@ public class GroupController {
     private GroupListService otherGroupListService;
 
     @PostMapping
-    public ResponseEntity<Void> groupCreate(@RequestBody @Valid CreateGroupRequest createGroupRequest) {
-        createGroupService.execute(createGroupRequest);
+    public ResponseEntity<Void> groupCreate(@RequestPart("data") @Valid CreateGroupRequest createGroupRequest, @RequestPart("file")MultipartFile file) {
+        createGroupService.execute(createGroupRequest, file);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

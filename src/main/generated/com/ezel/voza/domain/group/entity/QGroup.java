@@ -20,6 +20,11 @@ public class QGroup extends EntityPathBase<Group> {
 
     public static final QGroup group = new QGroup("group1");
 
+    public final com.ezel.voza.global.entity.QBaseTimeEntity _super = new com.ezel.voza.global.entity.QBaseTimeEntity(this);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
+
     public final NumberPath<Long> groupId = createNumber("groupId", Long.class);
 
     public final StringPath groupName = createString("groupName");
@@ -30,9 +35,14 @@ public class QGroup extends EntityPathBase<Group> {
 
     public final MapPath<com.ezel.voza.domain.user.entity.User, String, StringPath> members = this.<com.ezel.voza.domain.user.entity.User, String, StringPath>createMap("members", com.ezel.voza.domain.user.entity.User.class, String.class, StringPath.class);
 
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> modifiedDate = _super.modifiedDate;
+
     public final StringPath region = createString("region");
 
     public final SetPath<String, StringPath> tags = this.<String, StringPath>createSet("tags", String.class, StringPath.class, PathInits.DIRECT2);
+
+    public final StringPath url = createString("url");
 
     public QGroup(String variable) {
         super(Group.class, forVariable(variable));

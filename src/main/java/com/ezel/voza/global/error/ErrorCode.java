@@ -41,7 +41,13 @@ public enum ErrorCode {
     MISMATCH_INVITE_CODE("초대 코드가 올바르지 않습니다.", 403),
     ALREADY_EXIST_GROUP("이미 그룹에 속해있습니다.", 403),
     NOT_EXIST_GROUP("그 그룹에 속해있지않습니다.", 403),
-    LEADER_NOT_OUT_GROUP("리더는 그룹을 탈퇴할수없습니다.", 403);
+    LEADER_NOT_OUT_GROUP("리더는 그룹을 탈퇴할수없습니다.", 403),
+
+    //S3
+    AILED_UPLOAD_IMAGE("이미지 업로드에 실패했습니다", 500),
+    FILE_UPLOAD_FAIL("파일 업로드에 실패했습니다.", 500),
+    NOT_ALLOWED_FILE("허용되지 않은 파일 형식입니다.", 400),
+    INVALID_FORMAT_FILE("잘못된 형식의 파일입니다.", 400);
 
     private final String message;
     private final int status;
