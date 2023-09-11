@@ -8,6 +8,7 @@ import com.ezel.voza.domain.group.service.CreateGroupService;
 import com.ezel.voza.domain.user.entity.User;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,9 @@ public class CreateGroupServiceImpl implements CreateGroupService {
     private final GroupRepository groupRepository;
     private final UserUtil util;
     private final SingleFileUploadService singleFileUploadService;
+
+    @Value("${cloud.aws.s3.url}")
+    private String AWS_S3_ADDRESS;
 
     @Override
     public void execute(CreateGroupRequest createGroupRequest, MultipartFile file) {
@@ -39,7 +43,7 @@ public class CreateGroupServiceImpl implements CreateGroupService {
                 .region(createGroupRequest.getRegion())
                 .tags(new HashSet<>(createGroupRequest.getTags()))
                 .members(new HashMap<>())
-                .url(fileUrl)
+                .url(AWS_S3_ADDRESS + fileUrl)
                 .build();
 
         group.putMember(user, "Leader");
