@@ -2,6 +2,7 @@ package com.ezel.voza.domain.group.presentation;
 
 import com.ezel.voza.domain.group.presentation.dto.request.CreateGroupRequest;
 import com.ezel.voza.domain.group.presentation.dto.request.EnterGroupRequest;
+import com.ezel.voza.domain.group.presentation.dto.response.GroupDetailResponse;
 import com.ezel.voza.domain.group.presentation.dto.response.GroupListResponse;
 import com.ezel.voza.domain.group.service.*;
 import jakarta.validation.Valid;
@@ -13,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/group")
@@ -24,6 +23,7 @@ public class GroupController {
     private final CreateGroupInviteCode createGroupInviteCode;
     private final EnterGroupService enterGroupService;
     private final OutGroupService outGroupService;
+    private final GroupDetailService groupDetailService;
 
     @Autowired
     @Qualifier("myGroupListService")
@@ -67,5 +67,11 @@ public class GroupController {
     public ResponseEntity<GroupListResponse> getNotContainsGroupList() {
         var notContainsList = otherGroupListService.execute();
         return new ResponseEntity<>(notContainsList, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail/{groupId}")
+    public ResponseEntity<GroupDetailResponse> groupDetail(@PathVariable Long groupId) {
+        GroupDetailResponse response = groupDetailService.execute(groupId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
