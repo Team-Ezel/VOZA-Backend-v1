@@ -26,7 +26,7 @@ public class VoteOption {
     @ColumnDefault("0")
     private int count;
 
-    public void counting() {
-        this.count = this.count + 1;
+    public void addCount() {
+        this.count++;
     }
 }

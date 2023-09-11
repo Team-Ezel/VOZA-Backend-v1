@@ -25,6 +25,7 @@ public enum ErrorCode {
     //VOTE
     VOTE_NOT_FOUND("투표를 찾지 못했습니다.", 404),
     MISMATCH_VOTE_AUTHOR("내가 작성한 투표가 아닙니다.", 403),
+    MISMATCH_VOTE_OPTION("존재하지 않는 항목입니다.", 403),
 
     //USER
     USER_NOT_FOUND("사용자를 찾을 수 없습니다", 404),
