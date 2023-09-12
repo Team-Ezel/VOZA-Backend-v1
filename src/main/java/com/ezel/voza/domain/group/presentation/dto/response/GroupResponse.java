@@ -14,11 +14,20 @@ public class GroupResponse {
 
     private String groupName;
 
+    private String url;
+
+    private String leaderName;
+
+    private Integer members;
+
     public static GroupResponse groupResponse(Group group) {
 
         return GroupResponse.builder()
                 .groupId(group.getGroupId())
                 .groupName(group.getGroupName())
+                .url(group.getUrl())
+                .leaderName(group.getLeaderName())
+                .members(group.getMembers().size())
                 .build();
     }
 }
