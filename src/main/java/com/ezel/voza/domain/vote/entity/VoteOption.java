@@ -1,8 +1,11 @@
 package com.ezel.voza.domain.vote.entity;
 
+import com.ezel.voza.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +28,10 @@ public class VoteOption {
 
     @ColumnDefault("0")
     private int count;
+
+    @OneToMany(mappedBy = "voteOption", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private List<User> users;
 
     public void addCount() {
         this.count++;
