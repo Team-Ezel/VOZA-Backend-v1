@@ -38,7 +38,7 @@ public class AddCountServiceImpl implements AddCountService {
             throw new VoteOptionMismatchException();
         }
 
-        if(!(voteOptionRepository.findUserById(user.getId()))) {
+        if((voteOptionRepository.findUserById(user.getId()))) {
             throw new AlreadyVotedUserException();
         }
 
