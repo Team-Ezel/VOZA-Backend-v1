@@ -43,6 +43,7 @@ public class SecurityConfig {
                 .requestMatchers("/oauth2/**").permitAll()
                 .requestMatchers("/group/**").authenticated()
                 .requestMatchers("/group").authenticated()
+                .requestMatchers("/user/**").authenticated()
                 .anyRequest().denyAll();
         http
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
