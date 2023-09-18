@@ -28,6 +28,8 @@ public class QVoteOption extends EntityPathBase<VoteOption> {
 
     public final StringPath option = createString("option");
 
+    public final MapPath<com.ezel.voza.domain.user.entity.User, String, StringPath> users = this.<com.ezel.voza.domain.user.entity.User, String, StringPath>createMap("users", com.ezel.voza.domain.user.entity.User.class, String.class, StringPath.class);
+
     public final QVote vote;
 
     public QVoteOption(String variable) {
