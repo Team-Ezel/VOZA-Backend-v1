@@ -4,11 +4,13 @@ import com.ezel.voza.domain.group.presentation.dto.request.CreateGroupRequest;
 import com.ezel.voza.domain.group.presentation.dto.request.EnterGroupRequest;
 import com.ezel.voza.domain.group.presentation.dto.response.GroupDetailResponse;
 import com.ezel.voza.domain.group.presentation.dto.response.GroupListResponse;
+import com.ezel.voza.domain.group.presentation.dto.response.GroupResponse;
 import com.ezel.voza.domain.group.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,14 +26,8 @@ public class GroupController {
     private final EnterGroupService enterGroupService;
     private final OutGroupService outGroupService;
     private final GroupDetailService groupDetailService;
-
-    @Autowired
-    @Qualifier("myGroupListService")
-    private GroupListService myGroupListService;
-
-    @Autowired
-    @Qualifier("otherGroupListService")
-    private GroupListService otherGroupListService;
+    private final GroupListService myGroupListService;
+    private final OtherGroupListService otherGroupListService;
 
     @PostMapping
     public ResponseEntity<Void> groupCreate(@RequestPart("data") @Valid CreateGroupRequest createGroupRequest, @RequestPart("file")MultipartFile file) {
@@ -64,9 +60,10 @@ public class GroupController {
     }
 
     @GetMapping("/otherGroups")
-    public ResponseEntity<GroupListResponse> getNotContainsGroupList() {
-        var notContainsList = otherGroupListService.execute();
-        return new ResponseEntity<>(notContainsList, HttpStatus.OK);
+    public ResponseEntity<Page<GroupListResponse>> getNotContainsGroupList(@RequestParam(defaultValue = "0") int pageSize) {
+        Pageable pageable = PageRequest.of(pageSize, 10);
+        Page<GroupListResponse> page = otherGroupListService.execute(pageable);
+        return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
     @GetMapping("/detail/{groupId}")

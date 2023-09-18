@@ -4,15 +4,18 @@ import com.ezel.voza.domain.group.entity.Group;
 import com.ezel.voza.domain.group.presentation.dto.response.GroupListResponse;
 import com.ezel.voza.domain.group.presentation.dto.response.GroupResponse;
 import com.ezel.voza.domain.group.repository.GroupRepository;
-import com.ezel.voza.domain.group.service.GroupListService;
+import com.ezel.voza.domain.group.service.OtherGroupListService;
 import com.ezel.voza.domain.user.entity.User;
 import com.ezel.voza.global.util.UserUtil;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,14 +24,14 @@ import static com.ezel.voza.domain.group.entity.QGroup.group;
 @Service
 @RequiredArgsConstructor
 @Qualifier("otherGroupListService")
-public class NotContainsGroupServiceImpl implements GroupListService {
+public class NotContainsGroupServiceImpl implements OtherGroupListService {
 
     private final GroupRepository groupRepository;
     private final UserUtil util;
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public GroupListResponse execute() {
+    public Page<GroupListResponse> execute(Pageable pageable) {
         User currentUser = util.currentUser();
 
         // 자신이 속한 그룹 목록을 가져옵니다.
@@ -44,12 +47,22 @@ public class NotContainsGroupServiceImpl implements GroupListService {
                 .filter(group -> !userGroups.contains(group))
                 .toList();
 
-        return GroupListResponse.builder()
-                .groupList(
-                        notBelongingGroups.stream()
-                                .map(GroupResponse::groupResponse)
-                                .collect(Collectors.toList())
-                )
-                .build();
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<GroupListResponse> pagedGroups;
+
+        if (notBelongingGroups.size() < startItem) {
+            pagedGroups = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, notBelongingGroups.size());
+            pagedGroups = notBelongingGroups.subList(startItem, toIndex).stream()
+                    .map(group -> GroupListResponse.builder()
+                            .groupList(Collections.singletonList(GroupResponse.groupResponse(group)))
+                            .build())
+                    .collect(Collectors.toList());
+        }
+
+        return new PageImpl<>(pagedGroups, pageable, notBelongingGroups.size());
     }
 }
