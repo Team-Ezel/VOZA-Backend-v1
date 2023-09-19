@@ -15,6 +15,6 @@ public class CalenderUtil {
     public Calender findVoteById(Long id) {
 
         return calenderRepository.findById(id)
-                .orElseThrow(() -> new CalenderNotFoundException());
+                .orElseThrow(CalenderNotFoundException::new);
     }
 }
