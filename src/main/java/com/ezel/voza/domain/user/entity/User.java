@@ -33,4 +33,8 @@ public class User {
     @Column(name = "ban")
     @Enumerated(EnumType.STRING)
     private Banned banned;
+
+    public void updateRole(Role role) {
+        this.role = role;
+    }
 }

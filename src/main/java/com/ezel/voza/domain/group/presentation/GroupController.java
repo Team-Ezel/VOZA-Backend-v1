@@ -59,12 +59,12 @@ public class GroupController {
         return new ResponseEntity<>(containsList, HttpStatus.OK);
     }
 
-    @GetMapping("/otherGroups")
-    public ResponseEntity<Page<GroupListResponse>> getNotContainsGroupList(@RequestParam(defaultValue = "0") int pageSize) {
-        Pageable pageable = PageRequest.of(pageSize, 10);
-        Page<GroupListResponse> page = otherGroupListService.execute(pageable);
-        return new ResponseEntity<>(page, HttpStatus.OK);
-    }
+        @GetMapping("/otherGroups")
+        public ResponseEntity<Page<GroupListResponse>> getNotContainsGroupList(@RequestParam(defaultValue = "0") int pageSize) {
+            Pageable pageable = PageRequest.of(pageSize, 10);
+            Page<GroupListResponse> page = otherGroupListService.execute(pageable);
+            return new ResponseEntity<>(page, HttpStatus.OK);
+        }
 
     @GetMapping("/detail/{groupId}")
     public ResponseEntity<GroupDetailResponse> groupDetail(@PathVariable Long groupId) {
