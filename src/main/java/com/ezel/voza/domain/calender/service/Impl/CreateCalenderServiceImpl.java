@@ -37,6 +37,8 @@ public class CreateCalenderServiceImpl implements CreateCalenderService {
                 .group(group)
                 .build();
 
+        calender.setDate(createCalenderRequest.getStartDate().substring(0,7));
+
         calenderRepository.save(calender);
     }
 }
