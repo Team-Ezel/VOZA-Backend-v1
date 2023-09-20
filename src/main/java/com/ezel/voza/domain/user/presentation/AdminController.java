@@ -2,6 +2,7 @@ package com.ezel.voza.domain.user.presentation;
 
 import com.ezel.voza.domain.user.service.GrantAdminService;
 import com.ezel.voza.domain.user.service.RevokeAdminService;
+import com.ezel.voza.domain.user.service.UserBanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
-    private final GrantAdminService grantAdminService;
 
+    private final GrantAdminService grantAdminService;
     private final RevokeAdminService revokeAdminService;
+    private final UserBanService userBanService;
 
     @PatchMapping("/grant")
     public ResponseEntity<Void> grantRole(@RequestParam String email) {
@@ -27,6 +29,12 @@ public class AdminController {
     @PatchMapping("/revoke")
     public ResponseEntity<Void> revokeRole(@RequestParam String email) {
         revokeAdminService.execute(email);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/ban")
+    public ResponseEntity<Void> banUser(@RequestParam String email) {
+        userBanService.execute(email);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

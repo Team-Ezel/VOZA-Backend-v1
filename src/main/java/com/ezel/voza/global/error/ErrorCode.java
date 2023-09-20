@@ -51,7 +51,10 @@ public enum ErrorCode {
     INVALID_FORMAT_FILE("잘못된 형식의 파일입니다.", 400),
 
     //ADMIN
-    YOU_NOT_ADMIN("어드민 권한이 없습니다.", 403);
+    YOU_NOT_ADMIN("어드민 권한이 없습니다.", 403),
+
+    //BAN
+    YOU_BANNED("정지된 사용자입니다. 관리자에게 문의하세요", 403);
 
     private final String message;
     private final int status;
