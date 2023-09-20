@@ -54,7 +54,9 @@ public enum ErrorCode {
     YOU_NOT_ADMIN("어드민 권한이 없습니다.", 403),
 
     //BAN
-    YOU_BANNED("정지된 사용자입니다. 관리자에게 문의하세요", 403);
+    YOU_BANNED("정지된 사용자입니다. 관리자에게 문의하세요", 403),
+    NOT_EXIST_BLACK_USER("정지 목록에 없습니다.", 404);
+
 
     private final String message;
     private final int status;
