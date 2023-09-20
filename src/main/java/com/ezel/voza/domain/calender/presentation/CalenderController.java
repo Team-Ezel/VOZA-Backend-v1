@@ -1,7 +1,10 @@
 package com.ezel.voza.domain.calender.presentation;
 
 import com.ezel.voza.domain.calender.presentation.dto.request.CreateCalenderRequest;
+import com.ezel.voza.domain.calender.presentation.dto.request.GetDateRequest;
 import com.ezel.voza.domain.calender.presentation.dto.request.UpdateCalenderRequest;
+import com.ezel.voza.domain.calender.presentation.dto.response.CalenderMonthListResponse;
+import com.ezel.voza.domain.calender.service.CalenderMonthListService;
 import com.ezel.voza.domain.calender.service.CreateCalenderService;
 import com.ezel.voza.domain.calender.service.DeleteCalenderService;
 import com.ezel.voza.domain.calender.service.UpdateCalenderService;
@@ -22,10 +25,18 @@ public class CalenderController {
 
     private final UpdateCalenderService updateCalenderService;
 
+    private final CalenderMonthListService calenderMonthListService;
+
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateCalenderRequest createCalenderRequest, @PathVariable Long group_id) {
         createCalenderService.execute(createCalenderRequest, group_id);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<CalenderMonthListResponse> monthList(@PathVariable Long group_id, @RequestBody @Valid GetDateRequest getDateRequest) {
+        CalenderMonthListResponse calenderMonthListResponse = calenderMonthListService.execute(group_id, getDateRequest);
+        return new ResponseEntity<>(calenderMonthListResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{calender_id}")
