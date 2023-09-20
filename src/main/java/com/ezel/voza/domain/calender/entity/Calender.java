@@ -29,6 +29,9 @@ public class Calender {
     private User user;
 
     @Column(nullable = false)
+    private String date;
+
+    @Column(nullable = false)
     private String startDate;
 
     @Column(nullable = false)
@@ -43,5 +46,9 @@ public class Calender {
         this.content = updateCalenderRequest.getContent();
         this.startDate = updateCalenderRequest.getStartDate();
         this.endDate = updateCalenderRequest.getEndDate();
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
