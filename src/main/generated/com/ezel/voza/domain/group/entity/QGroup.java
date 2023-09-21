@@ -40,6 +40,8 @@ public class QGroup extends EntityPathBase<Group> {
 
     public final StringPath region = createString("region");
 
+    public final BooleanPath stop = createBoolean("stop");
+
     public final SetPath<String, StringPath> tags = this.<String, StringPath>createSet("tags", String.class, StringPath.class, PathInits.DIRECT2);
 
     public final StringPath url = createString("url");
