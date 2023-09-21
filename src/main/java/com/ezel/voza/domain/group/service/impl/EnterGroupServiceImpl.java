@@ -5,6 +5,7 @@ import com.ezel.voza.domain.group.entity.GroupInvite;
 import com.ezel.voza.domain.group.exception.AlreadyExistGroupException;
 import com.ezel.voza.domain.group.exception.GroupNotFoundException;
 import com.ezel.voza.domain.group.exception.MisMatchInviteCodeException;
+import com.ezel.voza.domain.group.exception.NotAllowedEnterBanGroupException;
 import com.ezel.voza.domain.group.presentation.dto.request.EnterGroupRequest;
 import com.ezel.voza.domain.group.repository.GroupInviteRepository;
 import com.ezel.voza.domain.group.repository.GroupRepository;
@@ -33,10 +34,15 @@ public class EnterGroupServiceImpl implements EnterGroupService {
         GroupInvite invite = groupInviteRepository.findById(enterGroupRequest.getEmail())
                 .orElseThrow(GroupNotFoundException::new);
 
+        Group group = groupRepository.findById(invite.getGroupId())
+                .orElseThrow(GroupNotFoundException::new);
+
+        if (group.getStop()) {
+            throw new NotAllowedEnterBanGroupException();
+        }
+
         if (Objects.equals(invite.getInviteCode(), enterGroupRequest.getInviteCode())) {
 
-            Group group = groupRepository.findById(invite.getGroupId())
-                    .orElseThrow(GroupNotFoundException::new);
 
             if (group.getMembers().containsKey(user)) {
                 throw new AlreadyExistGroupException();

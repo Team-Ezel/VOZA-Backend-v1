@@ -42,6 +42,7 @@ public class CreateGroupServiceImpl implements CreateGroupService {
                 .introduceGroup(createGroupRequest.getIntroduceGroup())
                 .region(createGroupRequest.getRegion())
                 .tags(new HashSet<>(createGroupRequest.getTags()))
+                .stop(false)
                 .members(new HashMap<>())
                 .url(AWS_S3_ADDRESS + fileUrl)
                 .build();

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -41,6 +42,8 @@ public class Group extends BaseTimeEntity {
 
     private String region;
 
+    private Boolean stop;
+
     @ElementCollection
     @CollectionTable(name = "group_tags", joinColumns = @JoinColumn(name = "group_id"))
     @Column(name = "tag")
@@ -64,4 +67,8 @@ public class Group extends BaseTimeEntity {
     }
 
     public void deleteMember(User user) { members.remove(user); }
+
+    public void setBan(Boolean banType) {
+        this.stop = banType;
+    }
 }

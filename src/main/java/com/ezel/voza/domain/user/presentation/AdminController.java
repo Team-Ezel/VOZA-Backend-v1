@@ -1,16 +1,10 @@
 package com.ezel.voza.domain.user.presentation;
 
-import com.ezel.voza.domain.user.service.GrantAdminService;
-import com.ezel.voza.domain.user.service.RevokeAdminService;
-import com.ezel.voza.domain.user.service.UserBanService;
-import com.ezel.voza.domain.user.service.UserUnBanService;
+import com.ezel.voza.domain.user.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,6 +15,7 @@ public class AdminController {
     private final RevokeAdminService revokeAdminService;
     private final UserBanService userBanService;
     private final UserUnBanService userUnBanService;
+    private final StopGroupService stopGroupService;
 
     @PatchMapping("/grant")
     public ResponseEntity<Void> grantRole(@RequestParam String email) {
@@ -43,6 +38,12 @@ public class AdminController {
     @PatchMapping("/unban")
     public ResponseEntity<Void> unBanUser(@RequestParam String email) {
         userUnBanService.execute(email);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/groupBan/{groupId}")
+    public ResponseEntity<Void> stopGroup(@PathVariable Long groupId) {
+        stopGroupService.execute(groupId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
