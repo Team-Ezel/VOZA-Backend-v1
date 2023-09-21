@@ -70,5 +70,9 @@ cloud:
     stack:
       auto: false
 
+discord:
+  webhook:
+    url: ${WEBHOOK_URL}
+
 server:
   port: 9088
