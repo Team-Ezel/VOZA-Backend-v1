@@ -43,6 +43,8 @@ public enum ErrorCode {
     ALREADY_EXIST_GROUP("이미 그룹에 속해있습니다.", 403),
     NOT_EXIST_GROUP("그 그룹에 속해있지않습니다.", 403),
     LEADER_NOT_OUT_GROUP("리더는 그룹을 탈퇴할수없습니다.", 403),
+    NOT_ALLOWED_ENTER_BAN_GROUP("정지된 그룹에 들어갈 수 없습니다.", 403),
+    EXIST_BAN_GROUP("이미 정지된 그룹입니다.", 401),
 
     //S3
     AILED_UPLOAD_IMAGE("이미지 업로드에 실패했습니다", 500),
