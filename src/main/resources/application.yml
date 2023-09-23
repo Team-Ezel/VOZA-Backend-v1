@@ -8,6 +8,19 @@ spring:
   main:
     allow-bean-definition-overriding: 'true'
 
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USER}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth:
+          starttls:
+            enable: true
+
+
   security:
     oauth2:
       client:
