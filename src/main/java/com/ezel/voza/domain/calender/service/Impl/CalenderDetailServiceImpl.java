@@ -18,7 +18,7 @@ public class CalenderDetailServiceImpl implements CalenderDetailService {
 
         Calender calender = calenderUtil.findCalenderById(id);
 
-        CalenderDetailResponse calenderDetailResponse = CalenderDetailResponse.builder()
+        return CalenderDetailResponse.builder()
                 .id(calender.getId())
                 .title(calender.getTitle())
                 .content(calender.getContent())
@@ -26,7 +26,5 @@ public class CalenderDetailServiceImpl implements CalenderDetailService {
                 .startDate(calender.getStartDate())
                 .endDate(calender.getEndDate())
                 .build();
-
-        return calenderDetailResponse;
     }
 }
