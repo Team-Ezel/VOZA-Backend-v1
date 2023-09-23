@@ -25,7 +25,7 @@ public class DeleteCalenderServiceImpl implements DeleteCalenderService {
     @Override
     public void execute(Long id) {
 
-        Calender calender = calenderUtil.findVoteById(id);
+        Calender calender = calenderUtil.findCalenderById(id);
 
         User user = userUtil.currentUser();
 

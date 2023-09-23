@@ -12,7 +12,7 @@ public class CalenderUtil {
 
     private final CalenderRepository calenderRepository;
 
-    public Calender findVoteById(Long id) {
+    public Calender findCalenderById(Long id) {
 
         return calenderRepository.findById(id)
                 .orElseThrow(CalenderNotFoundException::new);
