@@ -6,6 +6,8 @@ import com.ezel.voza.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Builder
@@ -32,10 +34,10 @@ public class Calender {
     private String date;
 
     @Column(nullable = false)
-    private String startDate;
+    private LocalDateTime startDate;
 
     @Column(nullable = false)
-    private String endDate;
+    private LocalDateTime endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
@@ -46,9 +48,5 @@ public class Calender {
         this.content = updateCalenderRequest.getContent();
         this.startDate = updateCalenderRequest.getStartDate();
         this.endDate = updateCalenderRequest.getEndDate();
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 }

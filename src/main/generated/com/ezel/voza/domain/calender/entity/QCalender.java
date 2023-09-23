@@ -26,13 +26,13 @@ public class QCalender extends EntityPathBase<Calender> {
 
     public final StringPath date = createString("date");
 
-    public final StringPath endDate = createString("endDate");
+    public final DateTimePath<java.time.LocalDateTime> endDate = createDateTime("endDate", java.time.LocalDateTime.class);
 
     public final com.ezel.voza.domain.group.entity.QGroup group;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath startDate = createString("startDate");
+    public final DateTimePath<java.time.LocalDateTime> startDate = createDateTime("startDate", java.time.LocalDateTime.class);
 
     public final StringPath title = createString("title");
 

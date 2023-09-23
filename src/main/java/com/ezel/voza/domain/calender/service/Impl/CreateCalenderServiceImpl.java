@@ -32,12 +32,11 @@ public class CreateCalenderServiceImpl implements CreateCalenderService {
                 .title(createCalenderRequest.getTitle())
                 .content(createCalenderRequest.getContent())
                 .user(user)
+                .date(createCalenderRequest.getStartDate().toString().substring(0,7))
                 .startDate(createCalenderRequest.getStartDate())
                 .endDate(createCalenderRequest.getEndDate())
                 .group(group)
                 .build();
-
-        calender.setDate(createCalenderRequest.getStartDate().substring(0,7));
 
         calenderRepository.save(calender);
     }

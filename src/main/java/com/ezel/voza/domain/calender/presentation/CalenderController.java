@@ -3,11 +3,9 @@ package com.ezel.voza.domain.calender.presentation;
 import com.ezel.voza.domain.calender.presentation.dto.request.CreateCalenderRequest;
 import com.ezel.voza.domain.calender.presentation.dto.request.GetDateRequest;
 import com.ezel.voza.domain.calender.presentation.dto.request.UpdateCalenderRequest;
+import com.ezel.voza.domain.calender.presentation.dto.response.CalenderDayListResponse;
 import com.ezel.voza.domain.calender.presentation.dto.response.CalenderMonthListResponse;
-import com.ezel.voza.domain.calender.service.CalenderMonthListService;
-import com.ezel.voza.domain.calender.service.CreateCalenderService;
-import com.ezel.voza.domain.calender.service.DeleteCalenderService;
-import com.ezel.voza.domain.calender.service.UpdateCalenderService;
+import com.ezel.voza.domain.calender.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +25,8 @@ public class CalenderController {
 
     private final CalenderMonthListService calenderMonthListService;
 
+    private final CalenderDayListService calenderDayListService;
+
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid CreateCalenderRequest createCalenderRequest, @PathVariable Long group_id) {
         createCalenderService.execute(createCalenderRequest, group_id);
@@ -37,6 +37,12 @@ public class CalenderController {
     public ResponseEntity<CalenderMonthListResponse> monthList(@PathVariable Long group_id, @RequestBody @Valid GetDateRequest getDateRequest) {
         CalenderMonthListResponse calenderMonthListResponse = calenderMonthListService.execute(group_id, getDateRequest);
         return new ResponseEntity<>(calenderMonthListResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity<CalenderDayListResponse> dayList(@PathVariable Long group_id, @RequestBody @Valid GetDateRequest getDateRequest) {
+        CalenderDayListResponse calenderDayListResponse = calenderDayListService.execute(group_id, getDateRequest);
+        return new ResponseEntity<>(calenderDayListResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{calender_id}")
