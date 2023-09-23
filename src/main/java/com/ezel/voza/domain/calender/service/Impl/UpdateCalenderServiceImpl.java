@@ -23,7 +23,7 @@ public class UpdateCalenderServiceImpl implements UpdateCalenderService {
     @Override
     public void execute(UpdateCalenderRequest updateCalenderRequest, Long id) {
 
-        Calender calender = calenderUtil.findVoteById(id);
+        Calender calender = calenderUtil.findCalenderById(id);
 
         User user = userUtil.currentUser();
 
