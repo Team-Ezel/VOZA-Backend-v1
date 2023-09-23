@@ -16,17 +16,10 @@ import org.springframework.web.bind.annotation.*;
 public class ReportController {
 
     private final SendReportService sendReportService;
-    private final DetailReportService detailReportService;
 
     @PostMapping
     public ResponseEntity<Void> createReport(@RequestBody @Valid CreateReportRequest createReportRequest) {
         sendReportService.execute(createReportRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @GetMapping("/{reportId}")
-    public ResponseEntity<DetailReportResponse> detailReport(@PathVariable Long reportId) {
-        DetailReportResponse response = detailReportService.execute(reportId);
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

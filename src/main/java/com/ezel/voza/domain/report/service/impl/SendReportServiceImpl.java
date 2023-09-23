@@ -31,6 +31,7 @@ public class SendReportServiceImpl implements SendReportService {
                 .content(createReportRequest.getContent())
                 .name(user.getNickName())
                 .reportType(ReportType.from(createReportRequest.getInquiryType()))
+                .user(user)
                 .createTime(LocalDateTime.now())
                 .build();
 

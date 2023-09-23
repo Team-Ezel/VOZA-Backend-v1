@@ -60,7 +60,10 @@ public enum ErrorCode {
     NOT_EXIST_BLACK_USER("정지 목록에 없습니다.", 404),
 
     //REPORT
-    REPORT_NOT_EXIST("신고 목록이 존재 하지 않습니다.", 404);
+    REPORT_NOT_EXIST("신고 목록이 존재 하지 않습니다.", 404),
+
+    //EMAIL
+    SEND_EMAIL_FAILED("이메일 전송에 실패했습니다", 500);
 
 
     private final String message;
