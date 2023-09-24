@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Map;
+
 @Getter
 @Builder
 @AllArgsConstructor
@@ -18,7 +20,9 @@ public class MemberResponse {
 
     private String profileUrl;
 
-    public static MemberResponse toResponse(User user, String role) {
+    public static MemberResponse toResponse(Map.Entry<User, String> entry) {
+        User user = entry.getKey();
+        String role = entry.getValue();
 
         return MemberResponse.builder()
                 .id(user.getId())

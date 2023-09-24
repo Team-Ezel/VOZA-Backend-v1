@@ -28,7 +28,7 @@ public class MemberListServiceImpl implements MemberListService {
         return MemberListResponse.builder()
                 .memberResponses(
                         members.entrySet().stream()
-                                .map(entry -> MemberResponse.toResponse(entry.getKey(), entry.getValue()))
+                                .map(MemberResponse::toResponse)
                                 .collect(Collectors.toList())
                 )
                 .build();
