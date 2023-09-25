@@ -3,6 +3,7 @@ package com.ezel.voza.domain.group.service.impl;
 import com.ezel.voza.domain.group.entity.Group;
 import com.ezel.voza.domain.group.exception.AlreadyExistGroupException;
 import com.ezel.voza.domain.group.exception.EnterOnlyCodeException;
+import com.ezel.voza.domain.group.exception.NotAllowedEnterBanGroupException;
 import com.ezel.voza.domain.group.repository.GroupRepository;
 import com.ezel.voza.domain.group.service.EnterGroupService;
 import com.ezel.voza.domain.user.entity.User;
@@ -32,6 +33,10 @@ public class EnterGroupServiceImpl implements EnterGroupService {
 
         if(group.getCanEnter()) {
             throw new EnterOnlyCodeException();
+        }
+
+        if (group.getStop()) {
+            throw new NotAllowedEnterBanGroupException();
         }
 
         group.putMember(user, "member");
