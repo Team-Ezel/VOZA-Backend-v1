@@ -31,18 +31,21 @@ public class Group extends BaseTimeEntity {
     @Column(name = "group_id")
     private Long groupId;
 
-    @Column(name = "group_name")
+    @Column(name = "group_name", nullable = false)
     private String groupName;
 
-    @Column(name = "leader_name")
+    @Column(name = "leader_name", nullable = false)
     private String leaderName;
 
-    @Column(name = "intro")
+    @Column(name = "intro", nullable = false)
     private String introduceGroup;
 
+    @Column(nullable = false)
     private String region;
 
     private Boolean stop;
+
+    private Boolean canEnter;
 
     @ElementCollection
     @CollectionTable(name = "group_tags", joinColumns = @JoinColumn(name = "group_id"))
@@ -71,4 +74,6 @@ public class Group extends BaseTimeEntity {
     public void setBan(Boolean banType) {
         this.stop = banType;
     }
+
+    public void setSecurity(Boolean canEnter) { this.canEnter = canEnter; }
 }

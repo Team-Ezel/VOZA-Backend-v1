@@ -1,58 +1,46 @@
 package com.ezel.voza.domain.group.service.impl;
 
 import com.ezel.voza.domain.group.entity.Group;
-import com.ezel.voza.domain.group.entity.GroupInvite;
 import com.ezel.voza.domain.group.exception.AlreadyExistGroupException;
-import com.ezel.voza.domain.group.exception.GroupNotFoundException;
-import com.ezel.voza.domain.group.exception.MisMatchInviteCodeException;
+import com.ezel.voza.domain.group.exception.EnterOnlyCodeException;
 import com.ezel.voza.domain.group.exception.NotAllowedEnterBanGroupException;
-import com.ezel.voza.domain.group.presentation.dto.request.EnterGroupRequest;
-import com.ezel.voza.domain.group.repository.GroupInviteRepository;
 import com.ezel.voza.domain.group.repository.GroupRepository;
 import com.ezel.voza.domain.group.service.EnterGroupService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.util.GroupUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class EnterGroupServiceImpl implements EnterGroupService {
 
-    private final GroupInviteRepository groupInviteRepository;
+    private final GroupUtil groupUtil;
     private final GroupRepository groupRepository;
-    private final UserUtil util;
+    private final UserUtil userUtil;
 
     @Override
-    public void execute(EnterGroupRequest enterGroupRequest) {
+    public void execute(Long groupId) {
 
-        User user = util.currentUser();
+        Group group = groupUtil.findGroupById(groupId);
 
+        User user = userUtil.currentUser();
 
-        GroupInvite invite = groupInviteRepository.findById(enterGroupRequest.getEmail())
-                .orElseThrow(GroupNotFoundException::new);
+        if (group.getMembers().containsKey(user)) {
+            throw new AlreadyExistGroupException();
+        }
 
-        Group group = groupRepository.findById(invite.getGroupId())
-                .orElseThrow(GroupNotFoundException::new);
+        if(group.getCanEnter()) {
+            throw new EnterOnlyCodeException();
+        }
 
         if (group.getStop()) {
             throw new NotAllowedEnterBanGroupException();
         }
 
-        if (Objects.equals(invite.getInviteCode(), enterGroupRequest.getInviteCode())) {
+        group.putMember(user, "member");
 
-
-            if (group.getMembers().containsKey(user)) {
-                throw new AlreadyExistGroupException();
-            }
-
-            group.putMember(user, "member");
-
-            groupRepository.save(group);
-        } else {
-            throw new MisMatchInviteCodeException();
-        }
+        groupRepository.save(group);
     }
 }
