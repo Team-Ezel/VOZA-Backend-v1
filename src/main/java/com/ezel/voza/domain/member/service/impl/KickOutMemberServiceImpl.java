@@ -28,9 +28,7 @@ public class KickOutMemberServiceImpl implements KickOutMemberService {
 
         User currentUser = userUtil.currentUser();
 
-        if(!Objects.equals(group.getLeaderName(), currentUser.getNickName())) {
-            throw new NotManagerException();
-        }
+        roleCheck(group, currentUser);
 
         User kickOutMember = userUtil.findUserById(userId);
 
@@ -40,4 +38,11 @@ public class KickOutMemberServiceImpl implements KickOutMemberService {
 
         group.deleteMember(kickOutMember);
     }
+
+    private void roleCheck(Group group, User user) {
+        if (!Objects.equals(group.getLeaderName(), user.getNickName())) {
+            throw new NotManagerException();
+        }
+    }
+
 }
