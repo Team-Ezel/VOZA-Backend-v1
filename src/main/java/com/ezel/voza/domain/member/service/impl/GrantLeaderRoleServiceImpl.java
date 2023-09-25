@@ -3,7 +3,7 @@ package com.ezel.voza.domain.member.service.impl;
 import com.ezel.voza.domain.group.entity.Group;
 import com.ezel.voza.domain.group.exception.NotExistGroupException;
 import com.ezel.voza.domain.member.exception.NotManagerException;
-import com.ezel.voza.domain.member.service.KickOutMemberService;
+import com.ezel.voza.domain.member.service.GrantLeaderRoleService;
 import com.ezel.voza.domain.user.entity.User;
 import com.ezel.voza.global.util.GroupUtil;
 import com.ezel.voza.global.util.UserUtil;
@@ -12,10 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-
 @Service
 @RequiredArgsConstructor
-public class KickOutMemberServiceImpl implements KickOutMemberService {
+public class GrantLeaderRoleServiceImpl implements GrantLeaderRoleService {
 
     private final GroupUtil groupUtil;
 
@@ -28,21 +27,18 @@ public class KickOutMemberServiceImpl implements KickOutMemberService {
 
         User currentUser = userUtil.currentUser();
 
-        roleCheck(group, currentUser);
+        if(!Objects.equals(group.getLeaderName(), currentUser.getNickName())) {
+            throw new NotManagerException();
+        }
 
-        User kickOutMember = userUtil.findUserById(userId);
+        User user = userUtil.findUserById(userId);
 
-        if (!group.getMembers().containsKey(kickOutMember)) {
+        if (!group.getMembers().containsKey(user)) {
             throw new NotExistGroupException();
         }
 
-        group.deleteMember(kickOutMember);
+        group.putMember(currentUser, "member");
+        group.putMember(user, "Leader");
+        group.updateLeaderName(user.getNickName());
     }
-
-    private void roleCheck(Group group, User user) {
-        if (!Objects.equals(group.getLeaderName(), user.getNickName())) {
-            throw new NotManagerException();
-        }
-    }
-
 }
