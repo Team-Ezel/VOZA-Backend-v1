@@ -9,7 +9,7 @@ import com.ezel.voza.domain.group.exception.NotAllowedEnterBanGroupException;
 import com.ezel.voza.domain.group.presentation.dto.request.EnterGroupRequest;
 import com.ezel.voza.domain.group.repository.GroupInviteRepository;
 import com.ezel.voza.domain.group.repository.GroupRepository;
-import com.ezel.voza.domain.group.service.EnterGroupService;
+import com.ezel.voza.domain.group.service.EnterByCodeGroupService;
 import com.ezel.voza.domain.user.entity.User;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class EnterGroupServiceImpl implements EnterGroupService {
+public class EnterByCodeGroupServiceImpl implements EnterByCodeGroupService {
 
     private final GroupInviteRepository groupInviteRepository;
     private final GroupRepository groupRepository;
