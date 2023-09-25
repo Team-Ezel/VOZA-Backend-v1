@@ -76,4 +76,8 @@ public class Group extends BaseTimeEntity {
     }
 
     public void setSecurity(Boolean canEnter) { this.canEnter = canEnter; }
+
+    public void updateLeaderName(String name) {
+        this.leaderName = name;
+    }
 }
