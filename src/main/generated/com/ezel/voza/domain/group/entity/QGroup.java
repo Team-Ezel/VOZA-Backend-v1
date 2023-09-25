@@ -22,6 +22,8 @@ public class QGroup extends EntityPathBase<Group> {
 
     public final com.ezel.voza.global.entity.QBaseTimeEntity _super = new com.ezel.voza.global.entity.QBaseTimeEntity(this);
 
+    public final BooleanPath canEnter = createBoolean("canEnter");
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
 

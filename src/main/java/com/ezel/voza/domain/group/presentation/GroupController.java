@@ -1,9 +1,11 @@
 package com.ezel.voza.domain.group.presentation;
 
+import com.ezel.voza.domain.group.entity.Group;
 import com.ezel.voza.domain.group.presentation.dto.request.CreateGroupRequest;
 import com.ezel.voza.domain.group.presentation.dto.request.EnterGroupRequest;
 import com.ezel.voza.domain.group.presentation.dto.response.GroupDetailResponse;
 import com.ezel.voza.domain.group.presentation.dto.response.GroupListResponse;
+import com.ezel.voza.domain.group.presentation.dto.response.GroupResponse;
 import com.ezel.voza.domain.group.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,6 +32,7 @@ public class GroupController {
     private final GroupListService myGroupListService;
     private final OtherGroupListService otherGroupListService;
     private final EnterGroupService enterGroupService;
+    private final GroupRecommendedService groupRecommendedService;
 
     @PostMapping
     public ResponseEntity<Void> groupCreate(@RequestPart("data") @Valid CreateGroupRequest createGroupRequest, @RequestPart("file")MultipartFile file) {
@@ -64,7 +69,7 @@ public class GroupController {
         Pageable pageable = PageRequest.of(pageSize, 10);
         Page<GroupListResponse> page = otherGroupListService.execute(pageable);
         return new ResponseEntity<>(page, HttpStatus.OK);
-    }
+    }   
 
     @GetMapping("/detail/{groupId}")
     public ResponseEntity<GroupDetailResponse> groupDetail(@PathVariable Long groupId) {
@@ -76,5 +81,11 @@ public class GroupController {
     public ResponseEntity<Void> enterGroup(@PathVariable Long groupId) {
         enterGroupService.execute(groupId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/recommended")
+    public ResponseEntity<List<GroupResponse>> getRecommended() {
+        List<GroupResponse> recoGroupList = groupRecommendedService.execute();
+        return new ResponseEntity<>(recoGroupList, HttpStatus.OK);
     }
 }
