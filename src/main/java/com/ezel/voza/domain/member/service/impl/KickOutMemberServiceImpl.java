@@ -28,7 +28,7 @@ public class KickOutMemberServiceImpl implements KickOutMemberService {
 
         User currentUser = userUtil.currentUser();
 
-        if(!Objects.equals(group.getMembers().get(currentUser), "Leader")) {
+        if(!Objects.equals(group.getLeaderName(), currentUser.getNickName())) {
             throw new NotManagerException();
         }
 
