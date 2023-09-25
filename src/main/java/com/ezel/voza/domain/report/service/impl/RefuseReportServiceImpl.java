@@ -62,7 +62,7 @@ public class RefuseReportServiceImpl implements RefuseReportService {
                 "        <h2><p>거부 사유는 " + sendRefuseRequest.getMessage() + " 다음과 같습니다.\n" +
                 "        <br />\n" +
                 "        <p>\n" +
-                "            왜 거부됬는지나, 추가로 궁금한 사항이 있다면 디스코드 배선후#0056으로 문의주세요.\n" +
+                "            왜 거부됐는지나, 추가로 궁금한 사항이 있다면 디스코드 배선후#0056으로 문의주세요.\n" +
                 "        </p>\n" +
                 "    </div>\n" +
                 "</body>\n" +
