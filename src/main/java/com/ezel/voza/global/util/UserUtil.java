@@ -18,4 +18,9 @@ public class UserUtil {
         return userRepository.findByNickName(email)
                 .orElseThrow(UserNotFoundException::new);
     }
+
+    public User findUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(UserNotFoundException::new);
+    }
 }
