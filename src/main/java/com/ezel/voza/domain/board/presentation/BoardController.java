@@ -11,8 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
 @RequiredArgsConstructor
-@RequestMapping("/board")
+@RequestMapping("/group/{group_id}/board")
 public class BoardController {
 
     private final CreateBoardService createBoardService;
@@ -26,32 +27,32 @@ public class BoardController {
     private final DeleteBoardService deleteBoardService;
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest) {
-        createBoardService.execute(createBoardRequest);
+    public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest, @PathVariable Long group_id) {
+        createBoardService.execute(createBoardRequest, group_id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<ListBoardResponse> findAll() {
-        var list = listBoardService.execute();
+    public ResponseEntity<ListBoardResponse> findAll(@PathVariable Long group_id) {
+        var list = listBoardService.execute(group_id);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<DetailBoardResponse> findDetailOne(@PathVariable Long id) {
-        DetailBoardResponse oneFindById = getBoardDetailService.execute(id);
+    @GetMapping("/{board_id}")
+    public ResponseEntity<DetailBoardResponse> findDetailOne(@PathVariable Long board_id) {
+        DetailBoardResponse oneFindById = getBoardDetailService.execute(board_id);
         return new ResponseEntity<>(oneFindById, HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid UpdateBoardRequest updateBoardRequest) {
-        updateBoardService.execute(id, updateBoardRequest);
+    @PatchMapping("/{board_id}")
+    public ResponseEntity<Void> update(@PathVariable Long board_id, @RequestBody @Valid UpdateBoardRequest updateBoardRequest) {
+        updateBoardService.execute(board_id, updateBoardRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        deleteBoardService.execute(id);
+    @DeleteMapping("/{board_id}")
+    public ResponseEntity<Void> delete(@PathVariable Long board_id) {
+        deleteBoardService.execute(board_id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
