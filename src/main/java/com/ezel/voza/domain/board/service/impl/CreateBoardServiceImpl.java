@@ -25,11 +25,11 @@ public class CreateBoardServiceImpl implements CreateBoardService {
     private final GroupUtil groupUtil;
 
     @Override
-    public void execute(CreateBoardRequest createBoardRequest, Long id) {
+    public void execute(CreateBoardRequest createBoardRequest, Long groupId) {
 
         User user = util.currentUser();
 
-        Group group = groupUtil.findGroupById(id);
+        Group group = groupUtil.findGroupById(groupId);
 
         Board board = Board.builder()
                 .title(createBoardRequest.getTitle())

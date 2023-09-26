@@ -4,5 +4,5 @@ import com.ezel.voza.domain.board.presentation.dto.response.DetailBoardResponse;
 
 public interface GetBoardDetailService {
 
-    DetailBoardResponse execute(Long id);
+    DetailBoardResponse execute(Long boardId);
 }

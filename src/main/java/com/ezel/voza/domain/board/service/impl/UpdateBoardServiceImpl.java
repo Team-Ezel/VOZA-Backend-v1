@@ -22,9 +22,9 @@ public class UpdateBoardServiceImpl implements UpdateBoardService {
     private final BoardRepository boardRepository;
 
     @Override
-    public void execute(Long id, UpdateBoardRequest updateBoardRequest) {
+    public void execute(Long boardId, UpdateBoardRequest updateBoardRequest) {
 
-        Board board = boardUtil.findBoardById(id);
+        Board board = boardUtil.findBoardById(boardId);
 
         User user = userUtil.currentUser();
 

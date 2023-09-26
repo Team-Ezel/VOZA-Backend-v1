@@ -14,12 +14,12 @@ public class GetBoardDetailServiceImpl implements GetBoardDetailService {
     private final BoardUtil boardUtil;
 
     @Override
-    public DetailBoardResponse execute(Long id) {
+    public DetailBoardResponse execute(Long boardId) {
 
-        Board board = boardUtil.findBoardById(id);
+        Board board = boardUtil.findBoardById(boardId);
 
         return DetailBoardResponse.builder()
-                .id(board.getId())
+                .boardId(board.getId())
                 .title(board.getTitle())
                 .content(board.getContent())
                 .author(board.getAuthor())

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class BoardResponse {
 
-    private Long id;
+    private Long boardId;
 
     private String title;
 
@@ -28,7 +28,7 @@ public class BoardResponse {
     public static BoardResponse toResponse(Board board) {
 
         return BoardResponse.builder()
-                .id(board.getId())
+                .boardId(board.getId())
                 .title(board.getTitle())
                 .author(board.getAuthor())
                 .boardType(board.getBoardType())

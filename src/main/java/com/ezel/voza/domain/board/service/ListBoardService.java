@@ -4,5 +4,5 @@ import com.ezel.voza.domain.board.presentation.dto.response.ListBoardResponse;
 
 public interface ListBoardService {
 
-    ListBoardResponse execute(Long id);
+    ListBoardResponse execute(Long groupId);
 }

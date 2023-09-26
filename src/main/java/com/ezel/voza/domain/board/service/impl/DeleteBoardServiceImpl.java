@@ -23,9 +23,9 @@ public class DeleteBoardServiceImpl implements DeleteBoardService {
     private final UserUtil userUtil;
 
     @Override
-    public void execute(Long id) {
+    public void execute(Long boardId) {
 
-        Board board = boardUtil.findBoardById(id);
+        Board board = boardUtil.findBoardById(boardId);
 
         User user = userUtil.currentUser();
 

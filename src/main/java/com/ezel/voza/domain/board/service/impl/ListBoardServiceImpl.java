@@ -22,9 +22,9 @@ public class ListBoardServiceImpl implements ListBoardService {
     private final GroupUtil groupUtil;
 
     @Override
-    public ListBoardResponse execute(Long id) {
+    public ListBoardResponse execute(Long groupId) {
 
-        Group group = groupUtil.findGroupById(id);
+        Group group = groupUtil.findGroupById(groupId);
 
         List<Board> boards = boardRepository.findALlByGroup(group);
 

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class DetailBoardResponse {
 
-    private Long id;
+    private Long boardId;
 
     private String title;
 
