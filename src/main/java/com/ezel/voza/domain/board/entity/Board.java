@@ -2,6 +2,7 @@ package com.ezel.voza.domain.board.entity;
 
 import com.ezel.voza.domain.board.entity.enums.BoardType;
 import com.ezel.voza.domain.board.presentation.dto.request.UpdateBoardRequest;
+import com.ezel.voza.domain.group.entity.Group;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -38,6 +39,10 @@ public class Board {
 
     @LastModifiedDate
     private LocalDateTime editedDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    private Group group;
 
     public void update(UpdateBoardRequest updateBoardRequest) {
         this.title = updateBoardRequest.getTitle();

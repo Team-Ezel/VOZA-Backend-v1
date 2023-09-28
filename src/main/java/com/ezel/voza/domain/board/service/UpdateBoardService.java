@@ -4,5 +4,5 @@ import com.ezel.voza.domain.board.presentation.dto.request.UpdateBoardRequest;
 
 public interface UpdateBoardService {
 
-    void execute(Long id, UpdateBoardRequest updateBoardRequest);
+    void execute(Long boardId, UpdateBoardRequest updateBoardRequest);
 }
