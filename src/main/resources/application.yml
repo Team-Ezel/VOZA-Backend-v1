@@ -89,3 +89,19 @@ discord:
 
 server:
   port: 9088
+
+socket:
+  port: 8082
+
+messages:
+  basename: i18n/exception
+  encoding: UTF-8
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          socket:
+            config:
+              org.springframework.web.socket.config.WebSocketMessageBrokerStats: ERROR
