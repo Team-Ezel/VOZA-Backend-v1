@@ -44,8 +44,12 @@ public class Board {
     @JoinColumn(name = "group_id")
     private Group group;
 
+    @Column(name = "board_file_url")
+    private String url;
+
     public void update(UpdateBoardRequest updateBoardRequest) {
         this.title = updateBoardRequest.getTitle();
         this.content = updateBoardRequest.getContent();
+        this.editedDate = LocalDateTime.now();
     }
 }
