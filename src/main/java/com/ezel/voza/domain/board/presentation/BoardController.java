@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,8 +28,12 @@ public class BoardController {
     private final DeleteBoardService deleteBoardService;
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody @Valid CreateBoardRequest createBoardRequest, @PathVariable Long group_id) {
-        createBoardService.execute(createBoardRequest, group_id);
+    public ResponseEntity<Void> create(
+            @RequestPart("data") @Valid CreateBoardRequest createBoardRequest,
+            @RequestPart("file") MultipartFile file,
+            @PathVariable Long group_id)
+    {
+        createBoardService.execute(createBoardRequest, group_id, file);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
