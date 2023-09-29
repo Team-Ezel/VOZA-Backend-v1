@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .requestMatchers("/user/**").authenticated()
                 .requestMatchers("/admin/**").authenticated()
                 .requestMatchers("/report/**").authenticated()
-                .requestMatchers("/ws/**").permitAll()
+                .requestMatchers("/ws/**").authenticated()
                 .requestMatchers("/sub/**").permitAll()
                 .requestMatchers("/pub/**").permitAll()
                 .requestMatchers("/room/**").authenticated()
