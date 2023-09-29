@@ -103,7 +103,13 @@ dependencies {
     //mail
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+    //socket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.webjars:sockjs-client:1.1.2'
+    implementation 'org.webjars:stomp-websocket:2.3.3-1'
 
+    // netty
+    implementation 'com.corundumstudio.socketio:netty-socketio:1.7.22'
 }
 
 tasks.named('test') {

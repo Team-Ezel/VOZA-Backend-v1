@@ -65,7 +65,10 @@ public enum ErrorCode {
     REPORT_NOT_EXIST("신고 목록이 존재 하지 않습니다.", 404),
 
     //EMAIL
-    SEND_EMAIL_FAILED("이메일 전송에 실패했습니다", 500);
+    SEND_EMAIL_FAILED("이메일 전송에 실패했습니다", 500),
+
+    //ROOM
+    EXIST_CHATTING_ROOM("이미 그룹에대한 채팅방이 있습니다.", 400);
 
 
     private final String message;
