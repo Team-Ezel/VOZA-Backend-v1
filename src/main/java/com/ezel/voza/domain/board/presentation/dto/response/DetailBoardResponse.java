@@ -20,8 +20,6 @@ public class DetailBoardResponse {
 
     private String author;
 
-    private String url;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH-mm-ss")
     private LocalDateTime createdDate;
 

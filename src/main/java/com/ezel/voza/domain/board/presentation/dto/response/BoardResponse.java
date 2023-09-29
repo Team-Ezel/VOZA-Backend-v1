@@ -22,8 +22,6 @@ public class BoardResponse {
 
     private BoardType boardType;
 
-    private String url;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH-mm-ss")
     private LocalDateTime createdDate;
 
@@ -35,7 +33,6 @@ public class BoardResponse {
                 .author(board.getAuthor())
                 .boardType(board.getBoardType())
                 .createdDate(board.getCreatedDate())
-                .url(board.getUrl())
                 .build();
     }
 }
