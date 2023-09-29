@@ -22,19 +22,23 @@ public class QBoard extends EntityPathBase<Board> {
 
     public static final QBoard board = new QBoard("board");
 
+    public final com.ezel.voza.global.entity.QBaseTimeEntity _super = new com.ezel.voza.global.entity.QBaseTimeEntity(this);
+
     public final StringPath author = createString("author");
 
     public final EnumPath<com.ezel.voza.domain.board.entity.enums.BoardType> boardType = createEnum("boardType", com.ezel.voza.domain.board.entity.enums.BoardType.class);
 
     public final StringPath content = createString("content");
 
-    public final DateTimePath<java.time.LocalDateTime> createdDate = createDateTime("createdDate", java.time.LocalDateTime.class);
-
-    public final DateTimePath<java.time.LocalDateTime> editedDate = createDateTime("editedDate", java.time.LocalDateTime.class);
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdDate = _super.createdDate;
 
     public final com.ezel.voza.domain.group.entity.QGroup group;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> modifiedDate = _super.modifiedDate;
 
     public final StringPath title = createString("title");
 

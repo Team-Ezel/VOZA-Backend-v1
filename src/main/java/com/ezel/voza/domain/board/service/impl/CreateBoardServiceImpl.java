@@ -12,8 +12,6 @@ import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 @RequiredArgsConstructor
 public class CreateBoardServiceImpl implements CreateBoardService {
@@ -36,8 +34,6 @@ public class CreateBoardServiceImpl implements CreateBoardService {
                 .content(createBoardRequest.getContent())
                 .boardType(BoardType.from(createBoardRequest.getBoardType()))
                 .author(user.getNickName())
-                .createdDate(LocalDateTime.now())
-                .editedDate(LocalDateTime.now())
                 .group(group)
                 .build();
 
