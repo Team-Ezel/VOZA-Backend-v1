@@ -24,8 +24,7 @@ public class GetBoardDetailServiceImpl implements GetBoardDetailService {
                 .content(board.getContent())
                 .author(board.getAuthor())
                 .createdDate(board.getCreatedDate())
-                .editedDate(board.getEditedDate())
-                .url(board.getUrl())
+                .editedDate(board.getModifiedDate())
                 .build();
     }
 }
