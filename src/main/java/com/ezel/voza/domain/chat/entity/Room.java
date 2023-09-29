@@ -45,4 +45,8 @@ public class Room {
         this.lastChat.lastChat = lastChat;
         this.lastChat.lastSendAt = LocalDateTime.now();
     }
+
+    public void putMessage(String sender, String message) {
+        stringStringMap.put(sender, message);
+    }
 }

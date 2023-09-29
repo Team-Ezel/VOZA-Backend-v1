@@ -19,6 +19,8 @@ public class ChatSaveServiceImpl implements ChatSaveService {
     public void execute(Message message) {
         Room room = roomRepository.findByGroup(groupUtil.findGroupById(Long.valueOf(message.getGroupId())));
 
+        room.putMessage(message.getSender(), message.getMessage());
+
         room.updateLastChat(message.getMessage());
 
         roomRepository.save(room);
