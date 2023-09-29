@@ -50,7 +50,7 @@ public class SecurityConfig {
                 .requestMatchers("/sub/**").permitAll()
                 .requestMatchers("/pub/**").permitAll()
                 .requestMatchers("/room/**").authenticated()
-                .requestMatchers("/file").authenticated()
+                .requestMatchers("/file/**").authenticated()
                 .anyRequest().denyAll();
         http
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
