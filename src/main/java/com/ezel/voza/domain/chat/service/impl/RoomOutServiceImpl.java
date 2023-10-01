@@ -19,7 +19,7 @@ public class RoomOutServiceImpl implements RoomOutService {
     private final RoomRepository roomRepository;
 
     @Override
-    public void execute(Long groupId, Group group) {
+    public void execute(Group group) {
         User user = userUtil.currentUser();
         checkExistRoom(user, group);
 

@@ -4,5 +4,5 @@ import com.ezel.voza.domain.group.entity.Group;
 
 public interface RoomOutService {
 
-    void execute(Long groupId, Group group);
+    void execute(Group group);
 }
