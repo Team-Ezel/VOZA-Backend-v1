@@ -68,7 +68,9 @@ public enum ErrorCode {
     SEND_EMAIL_FAILED("이메일 전송에 실패했습니다", 500),
 
     //ROOM
-    EXIST_CHATTING_ROOM("이미 그룹에대한 채팅방이 있습니다.", 400);
+    EXIST_CHATTING_ROOM("이미 그룹에대한 채팅방이 있습니다.", 400),
+    NOT_ALLOWED_EXIST_USER("Room에 속한 User만 채팅을 가져올수 있습니다.", 403),
+    NOT_EXIST_ROOM("Room에 속해 있지 않습니다.", 403);
 
 
     private final String message;
