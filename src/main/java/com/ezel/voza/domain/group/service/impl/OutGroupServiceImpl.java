@@ -1,5 +1,6 @@
 package com.ezel.voza.domain.group.service.impl;
 
+import com.ezel.voza.domain.chat.service.RoomOutService;
 import com.ezel.voza.domain.group.entity.Group;
 import com.ezel.voza.domain.group.exception.LeaderNotOutGroupException;
 import com.ezel.voza.domain.group.exception.NotExistGroupException;
@@ -18,6 +19,7 @@ public class OutGroupServiceImpl implements OutGroupService {
     private final UserUtil userUtil;
     private final GroupUtil groupUtil;
     private final GroupRepository groupRepository;
+    private final RoomOutService roomOutService;
 
     @Override
     public void execute(Long groupId) {
@@ -37,5 +39,7 @@ public class OutGroupServiceImpl implements OutGroupService {
         } else {
             throw new LeaderNotOutGroupException();
         }
+
+        roomOutService.execute(group);
     }
 }
