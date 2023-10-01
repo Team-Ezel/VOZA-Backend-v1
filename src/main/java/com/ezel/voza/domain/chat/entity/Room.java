@@ -23,30 +23,13 @@ public class Room {
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @ElementCollection
-    @Builder.Default
-    Map<String, String> stringStringMap = new LinkedHashMap<>();
+    @Column(nullable = false)
+    private String lastChat;
 
-    @Embedded
-    private LastChat lastChat;
+    private LocalDateTime lastSendAt;
 
-    @Getter
-    @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    @AllArgsConstructor
-    public static class LastChat {
-        private String lastChat;
-        private LocalDateTime lastSendAt;
-
-        public LastChat(String lastChat, String toTimeAgo) {
-        }
-    }
-
-    public void updateLastChat(String lastChat) {
-        this.lastChat.lastChat = lastChat;
-        this.lastChat.lastSendAt = LocalDateTime.now();
-    }
-
-    public void putMessage(String sender, String message) {
-        stringStringMap.put(sender, message);
+    public void updateLastChat(String message) {
+        this.lastChat = message;
+        this.lastSendAt = LocalDateTime.now();
     }
 }

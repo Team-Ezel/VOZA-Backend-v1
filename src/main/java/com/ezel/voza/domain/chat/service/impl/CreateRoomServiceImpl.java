@@ -28,15 +28,10 @@ public class CreateRoomServiceImpl implements CreateRoomService {
             throw new ExistRoomException();
         }
 
-        Room.LastChat lastChat = new Room.LastChat(
-                "그룹" + groupId.toString() + "에 대한 채팅방이 생성되었습니다.",
-                LocalDateTime.now()
-        );
-
         Room room = Room.builder()
                 .group(group)
-                .stringStringMap(new LinkedHashMap<>())
-                .lastChat(lastChat)
+                .lastChat(groupId + "에 대한 방이 생성되었습니다.")
+                .lastSendAt(LocalDateTime.now())
                 .build();
 
         roomRepository.save(room);
