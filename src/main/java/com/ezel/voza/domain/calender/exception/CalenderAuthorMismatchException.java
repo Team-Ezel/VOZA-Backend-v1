@@ -1,4 +1,4 @@
-package com.ezel.voza.domain.calender.Exception;
+package com.ezel.voza.domain.calender.exception;
 
 import com.ezel.voza.global.error.BasicException;
 import com.ezel.voza.global.error.ErrorCode;
