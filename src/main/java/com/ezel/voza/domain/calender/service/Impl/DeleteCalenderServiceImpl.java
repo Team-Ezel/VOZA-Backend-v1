@@ -1,6 +1,6 @@
 package com.ezel.voza.domain.calender.service.Impl;
 
-import com.ezel.voza.domain.calender.Exception.CalenderAuthorMismatchException;
+import com.ezel.voza.domain.calender.exception.CalenderAuthorMismatchException;
 import com.ezel.voza.domain.calender.entity.Calender;
 import com.ezel.voza.domain.calender.repository.CalenderRepository;
 import com.ezel.voza.domain.calender.service.DeleteCalenderService;

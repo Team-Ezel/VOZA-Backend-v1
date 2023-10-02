@@ -1,6 +1,6 @@
 package com.ezel.voza.global.util;
 
-import com.ezel.voza.domain.calender.Exception.CalenderNotFoundException;
+import com.ezel.voza.domain.calender.exception.CalenderNotFoundException;
 import com.ezel.voza.domain.calender.entity.Calender;
 import com.ezel.voza.domain.calender.repository.CalenderRepository;
 import lombok.RequiredArgsConstructor;
