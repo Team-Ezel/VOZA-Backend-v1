@@ -33,8 +33,8 @@ public enum ErrorCode {
     ROLE_NOT_EXIST("역할이 존재하지 않습니다.", 404),
 
     //MEMBER
-    MEMBER_NOT_FOUND("회원을 찾을 수 없습니다", 404),
     NOT_MANAGER("관리자 권한이 없습니다.", 403),
+    INVALID_FORMAT("잘못된 형식입니다.", 403),
 
     //GROUP
     GROUP_NOT_FOUND("그룹을 찾을 수 없습니다", 404),
