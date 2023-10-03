@@ -7,14 +7,12 @@ import com.ezel.voza.domain.group.presentation.dto.request.EnterGroupRequest;
 import com.ezel.voza.domain.group.repository.GroupInviteRepository;
 import com.ezel.voza.domain.group.repository.GroupRepository;
 import com.ezel.voza.domain.group.service.EnterByCodeGroupService;
-import com.ezel.voza.domain.member.entity.BlackMember;
-import com.ezel.voza.domain.member.repository.BlackMemberRepository;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.util.CheckBlackMemberUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Service
@@ -24,7 +22,7 @@ public class EnterByCodeGroupServiceImpl implements EnterByCodeGroupService {
     private final GroupInviteRepository groupInviteRepository;
     private final GroupRepository groupRepository;
     private final UserUtil util;
-    private final BlackMemberRepository blackMemberRepository;
+    private final CheckBlackMemberUtil checkBlackMember;
 
     @Override
     public void execute(EnterGroupRequest enterGroupRequest) {
@@ -48,25 +46,13 @@ public class EnterByCodeGroupServiceImpl implements EnterByCodeGroupService {
                 throw new AlreadyExistGroupException();
             }
 
-            checkBlackMember(group, user);
+            checkBlackMember.check(group, user);
 
             group.putMember(user, "member");
 
             groupRepository.save(group);
         } else {
             throw new MisMatchInviteCodeException();
-        }
-    }
-
-    public void checkBlackMember(Group group, User user) {
-        BlackMember blackMember = blackMemberRepository.findByGroupAndUser(group, user);
-
-        if (blackMember != null) {
-            LocalDateTime currentTime = LocalDateTime.now();
-
-            if (currentTime.isBefore(blackMember.getKickOutTime())) {
-                throw new KickOutUserException();
-            }
         }
     }
 }
