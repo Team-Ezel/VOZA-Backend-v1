@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/group/{group_id}/member")
+@RequestMapping("/group/{groupId}/member")
 public class MemberController {
 
     private final MemberListService memberListService;
@@ -21,20 +21,24 @@ public class MemberController {
     private final GrantLeaderRoleService grantLeaderRoleService;
 
     @GetMapping
-    public ResponseEntity<MemberListResponse> findAllMember(@PathVariable Long group_id) {
-        MemberListResponse memberListResponse = memberListService.execute(group_id);
+    public ResponseEntity<MemberListResponse> findAllMember(@PathVariable Long groupId) {
+        MemberListResponse memberListResponse = memberListService.execute(groupId);
         return new ResponseEntity<>(memberListResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{user_id}")
-    public ResponseEntity<Void> kickOutMember(@PathVariable Long group_id, @PathVariable Long user_id) {
-        kickOutMemberService.execute(group_id, user_id);
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> kickOutMember(
+            @PathVariable Long groupId,
+            @PathVariable Long userId,
+            @RequestParam String kickOutTime
+    ) {
+        kickOutMemberService.execute(groupId, userId, kickOutTime);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/grant/{user_id}")
-    public ResponseEntity<Void> grantLeaderRole(@PathVariable Long group_id, @PathVariable Long user_id) {
-        grantLeaderRoleService.execute(group_id, user_id);
+    @PatchMapping("/grant/{userId}")
+    public ResponseEntity<Void> grantLeaderRole(@PathVariable Long groupId, @PathVariable Long userId) {
+        grantLeaderRoleService.execute(groupId, userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
