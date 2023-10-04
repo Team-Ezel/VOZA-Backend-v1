@@ -33,8 +33,8 @@ public enum ErrorCode {
     ROLE_NOT_EXIST("역할이 존재하지 않습니다.", 404),
 
     //MEMBER
-    MEMBER_NOT_FOUND("회원을 찾을 수 없습니다", 404),
     NOT_MANAGER("관리자 권한이 없습니다.", 403),
+    INVALID_FORMAT("잘못된 형식입니다.", 403),
 
     //GROUP
     GROUP_NOT_FOUND("그룹을 찾을 수 없습니다", 404),
@@ -47,6 +47,7 @@ public enum ErrorCode {
     EXIST_BAN_GROUP("이미 정지된 그룹입니다.", 401),
     YOU_NOT_LEADER("리더만 그룹 관리를 할 수 있습니다.", 403),
     ENTER_ONLY_CODE("초대코드로만 입장할 수 있는 그룹입니다.", 403),
+    KICK_OUT_USER("추방된 유저입니다.", 403),
 
     //S3
     AILED_UPLOAD_IMAGE("이미지 업로드에 실패했습니다", 500),

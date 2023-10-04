@@ -7,6 +7,7 @@ import com.ezel.voza.domain.group.exception.NotAllowedEnterBanGroupException;
 import com.ezel.voza.domain.group.repository.GroupRepository;
 import com.ezel.voza.domain.group.service.EnterGroupService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.util.CheckBlackMemberUtil;
 import com.ezel.voza.global.util.GroupUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class EnterGroupServiceImpl implements EnterGroupService {
     private final GroupUtil groupUtil;
     private final GroupRepository groupRepository;
     private final UserUtil userUtil;
+    private final CheckBlackMemberUtil checkBlackMember;
 
     @Override
     public void execute(Long groupId) {
@@ -38,6 +40,8 @@ public class EnterGroupServiceImpl implements EnterGroupService {
         if (group.getStop()) {
             throw new NotAllowedEnterBanGroupException();
         }
+
+        checkBlackMember.check(group, user);
 
         group.putMember(user, "member");
 
