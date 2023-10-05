@@ -1,0 +1,85 @@
+name: Deploy to cloudtype
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: rubycpp1225/ttj
+          stage: main
+          yaml: >
+            name: voza
+
+            app: java@17
+
+            options:
+              ports: "9088"
+              healthz: /healthing
+              env:
+                - name: WEBHOOK_URL
+                  value: ${{ secrets.WEBHOOK_URL }}
+                - name: USER_INFO_URI
+                  value: https://kapi.kakao.com/v2/user/me
+                - name: TOKEN_URI
+                  value: https://kauth.kakao.com/oauth/token
+                - name: REFRESH_TIME
+                  value: ${{ secrets.REFRESH_TIME }}
+                - name: REFRESH_SECRET
+                  value: ${{ secrets.REFRESH_SECRET }}
+                - name: REDIRECT_URL
+                  value: http://localhost:9088/oauth2/kakao
+                - name: R_PORT
+                  value: ${{ secrets.R_PORT }}
+                - name: R_HOST
+                  value: ${{ secrets.R_HOST }}
+                - name: MAIL_USER
+                  value: ${{ secrets.MAIL_USER }}
+                - name: MAIL_PORT
+                  value: ${{ secrets.MAIL_PORT }}
+                - name: MAIL_PASSWORD
+                  value: ${{ secrets.MAIL_PASSWORD }}
+                - name: MAIL_HOST
+                  value: ${{ secrets.MAIL_HOST }}
+                - name: DB_USER
+                  value: ${{ secrets.DB_USER }}
+                - name: DB_URL
+                  value: ${{ secrets.DB_URL }}
+                - name: DB_PASSWORD
+                  value: ${{ secrets.DB_PASSWORD }}
+                - name: DB_CLASS
+                  value: org.mariadb.jdbc.Driver
+                - name: CLIENT_ID
+                  value: ${{ secrets.CLIENT_ID }}
+                - name: AWS_URL
+                  value: ${{ secrets.AWS_URL }}
+                - name: AWS_SECRET
+                  value: ${{ secrets.AWS_SECRET }}
+                - name: AWS_REGION
+                  value: ${{ secrets.AWS_REGION }}
+                - name: AWS_BUCKET_NAME
+                  value: ${{ secrets.AWS_BUCKET_NAME }}
+                - name: AWS_ACCESS
+                  value: ${{ secrets.AWS_ACCESS }}
+                - name: AUTH_URI
+                  value: https://kauth.kakao.com/oauth/authorize
+                - name: ACCESS_TIME
+                  value: ${{ secrets.ACCESS_TIME }}
+                - name: ACCESS_SECRET
+                  value: ${{secrets.ACCESS_SECRET }}
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
