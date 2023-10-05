@@ -6,12 +6,12 @@ import com.ezel.voza.domain.calender.repository.CalenderRepository;
 import com.ezel.voza.domain.calender.service.CreateCalenderService;
 import com.ezel.voza.domain.group.entity.Group;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.GroupUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class CreateCalenderServiceImpl implements CreateCalenderService {
 

@@ -6,6 +6,7 @@ import com.ezel.voza.domain.group.presentation.dto.response.GroupResponse;
 import com.ezel.voza.domain.group.repository.GroupRepository;
 import com.ezel.voza.domain.group.service.OtherGroupListService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.UserUtil;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 import static com.ezel.voza.domain.group.entity.QGroup.group;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 @Qualifier("otherGroupListService")
 public class NotContainsGroupServiceImpl implements OtherGroupListService {

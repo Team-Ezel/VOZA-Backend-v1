@@ -6,14 +6,14 @@ import com.ezel.voza.domain.board.presentation.dto.response.ListBoardResponse;
 import com.ezel.voza.domain.board.repository.BoardRepository;
 import com.ezel.voza.domain.board.service.ListBoardService;
 import com.ezel.voza.domain.group.entity.Group;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.GroupUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 public class ListBoardServiceImpl implements ListBoardService {
 

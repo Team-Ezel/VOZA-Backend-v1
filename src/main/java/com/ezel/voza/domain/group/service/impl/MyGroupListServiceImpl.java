@@ -5,15 +5,15 @@ import com.ezel.voza.domain.group.presentation.dto.response.GroupListResponse;
 import com.ezel.voza.domain.group.presentation.dto.response.GroupResponse;
 import com.ezel.voza.domain.group.repository.GroupRepository;
 import com.ezel.voza.domain.group.service.GroupListService;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 @Qualifier("myGroupListService")
 public class MyGroupListServiceImpl implements GroupListService {

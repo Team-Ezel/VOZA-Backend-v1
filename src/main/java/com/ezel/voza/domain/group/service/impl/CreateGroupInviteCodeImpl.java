@@ -8,14 +8,14 @@ import com.ezel.voza.domain.group.repository.GroupInviteRepository;
 import com.ezel.voza.domain.group.repository.GroupRepository;
 import com.ezel.voza.domain.group.service.CreateGroupInviteCode;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.Random;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class CreateGroupInviteCodeImpl implements CreateGroupInviteCode {
 

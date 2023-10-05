@@ -7,14 +7,14 @@ import com.ezel.voza.domain.calender.presentation.dto.response.CalenderMonthResp
 import com.ezel.voza.domain.calender.repository.CalenderRepository;
 import com.ezel.voza.domain.calender.service.CalenderMonthListService;
 import com.ezel.voza.domain.group.entity.Group;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.GroupUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 public class CalenderMonthListServiceImpl implements CalenderMonthListService {
 

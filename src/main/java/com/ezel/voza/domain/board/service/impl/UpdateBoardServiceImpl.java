@@ -6,12 +6,12 @@ import com.ezel.voza.domain.board.presentation.dto.request.UpdateBoardRequest;
 import com.ezel.voza.domain.board.repository.BoardRepository;
 import com.ezel.voza.domain.board.service.UpdateBoardService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.BoardUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class UpdateBoardServiceImpl implements UpdateBoardService {
 

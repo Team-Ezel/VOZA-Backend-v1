@@ -6,14 +6,14 @@ import com.ezel.voza.domain.vote.presentation.dto.response.ListVoteResponse;
 import com.ezel.voza.domain.vote.presentation.dto.response.VoteResponse;
 import com.ezel.voza.domain.vote.repository.VoteRepository;
 import com.ezel.voza.domain.vote.service.ListVoteService;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.GroupUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 public class ListVoteServiceImpl implements ListVoteService {
 

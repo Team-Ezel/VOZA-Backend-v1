@@ -5,14 +5,13 @@ import com.ezel.voza.domain.chat.exception.ExistRoomException;
 import com.ezel.voza.domain.chat.repository.RoomRepository;
 import com.ezel.voza.domain.chat.service.CreateRoomService;
 import com.ezel.voza.domain.group.entity.Group;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.GroupUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class CreateRoomServiceImpl implements CreateRoomService {
 

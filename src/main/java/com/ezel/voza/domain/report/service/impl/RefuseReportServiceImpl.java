@@ -6,14 +6,14 @@ import com.ezel.voza.domain.report.exception.NotFoundReportException;
 import com.ezel.voza.domain.report.presentation.dto.request.SendRefuseRequest;
 import com.ezel.voza.domain.report.repository.ReportRepository;
 import com.ezel.voza.domain.report.service.RefuseReportService;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class RefuseReportServiceImpl implements RefuseReportService {
 

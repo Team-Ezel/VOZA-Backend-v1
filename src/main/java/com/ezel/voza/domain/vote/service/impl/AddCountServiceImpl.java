@@ -8,14 +8,14 @@ import com.ezel.voza.domain.vote.exception.VoteOptionMismatchException;
 import com.ezel.voza.domain.vote.presentation.dto.request.AddCountRequest;
 import com.ezel.voza.domain.vote.repository.VoteOptionRepository;
 import com.ezel.voza.domain.vote.service.AddCountService;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.UserUtil;
 import com.ezel.voza.global.util.VoteUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class AddCountServiceImpl implements AddCountService {
 

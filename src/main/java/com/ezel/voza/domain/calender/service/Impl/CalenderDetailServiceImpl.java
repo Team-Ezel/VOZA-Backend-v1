@@ -3,11 +3,11 @@ package com.ezel.voza.domain.calender.service.Impl;
 import com.ezel.voza.domain.calender.entity.Calender;
 import com.ezel.voza.domain.calender.presentation.dto.response.CalenderDetailResponse;
 import com.ezel.voza.domain.calender.service.CalenderDetailService;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.CalenderUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 public class CalenderDetailServiceImpl implements CalenderDetailService {
 

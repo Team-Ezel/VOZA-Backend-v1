@@ -5,14 +5,14 @@ import com.ezel.voza.domain.board.exception.BoardAuthorMismatchException;
 import com.ezel.voza.domain.board.repository.BoardRepository;
 import com.ezel.voza.domain.board.service.DeleteBoardService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.BoardUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class DeleteBoardServiceImpl implements DeleteBoardService {
 
