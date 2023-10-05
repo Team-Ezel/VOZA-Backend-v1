@@ -8,14 +8,14 @@ import com.ezel.voza.domain.member.exception.NotManagerException;
 import com.ezel.voza.domain.member.repository.BlackMemberRepository;
 import com.ezel.voza.domain.member.service.KickOutMemberService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.GroupUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class KickOutMemberServiceImpl implements KickOutMemberService {
 

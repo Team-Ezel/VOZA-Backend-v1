@@ -7,11 +7,11 @@ import com.ezel.voza.domain.user.entity.enums.Role;
 import com.ezel.voza.domain.user.exception.ExistBanGroupException;
 import com.ezel.voza.domain.user.exception.YouNotAdminException;
 import com.ezel.voza.domain.user.service.StopGroupService;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class StopGroupServiceImpl implements StopGroupService {
 

@@ -6,14 +6,14 @@ import com.ezel.voza.domain.vote.entity.Vote;
 import com.ezel.voza.domain.vote.presentation.dto.request.CreateVoteRequest;
 import com.ezel.voza.domain.vote.repository.VoteRepository;
 import com.ezel.voza.domain.vote.service.CreateVoteService;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.GroupUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class CreateVoteServiceImpl implements CreateVoteService {
 

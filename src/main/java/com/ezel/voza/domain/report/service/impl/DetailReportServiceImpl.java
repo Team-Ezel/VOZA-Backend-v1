@@ -7,12 +7,12 @@ import com.ezel.voza.domain.report.repository.ReportRepository;
 import com.ezel.voza.domain.report.service.DetailReportService;
 import com.ezel.voza.domain.user.entity.enums.Role;
 import com.ezel.voza.domain.user.exception.YouNotAdminException;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Service
+@ReadOnlyService
 public class DetailReportServiceImpl implements DetailReportService {
 
     private final ReportRepository reportRepository;

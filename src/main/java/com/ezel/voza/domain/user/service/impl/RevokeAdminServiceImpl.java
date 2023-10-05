@@ -6,11 +6,11 @@ import com.ezel.voza.domain.user.entity.enums.Role;
 import com.ezel.voza.domain.user.exception.YouNotAdminException;
 import com.ezel.voza.domain.user.repository.UserRepository;
 import com.ezel.voza.domain.user.service.RevokeAdminService;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class RevokeAdminServiceImpl implements RevokeAdminService {
 

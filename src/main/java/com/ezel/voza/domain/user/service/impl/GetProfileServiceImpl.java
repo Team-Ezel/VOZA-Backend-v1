@@ -3,11 +3,11 @@ package com.ezel.voza.domain.user.service.impl;
 import com.ezel.voza.domain.user.entity.User;
 import com.ezel.voza.domain.user.presentation.dto.response.ProfileResponse;
 import com.ezel.voza.domain.user.service.GetProfileService;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 public class GetProfileServiceImpl implements GetProfileService {
 

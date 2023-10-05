@@ -10,11 +10,11 @@ import com.ezel.voza.domain.user.exception.NotBlackUserException;
 import com.ezel.voza.domain.user.exception.YouNotAdminException;
 import com.ezel.voza.domain.user.repository.UserRepository;
 import com.ezel.voza.domain.user.service.UserUnBanService;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class UserUnBanServiceImpl implements UserUnBanService {
 

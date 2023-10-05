@@ -5,14 +5,14 @@ import com.ezel.voza.domain.member.presentation.response.MemberListResponse;
 import com.ezel.voza.domain.member.presentation.response.MemberResponse;
 import com.ezel.voza.domain.member.service.MemberListService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.GroupUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 public class MemberListServiceImpl implements MemberListService {
 

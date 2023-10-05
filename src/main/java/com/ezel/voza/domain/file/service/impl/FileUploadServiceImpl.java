@@ -10,9 +10,9 @@ import com.ezel.voza.domain.file.exception.InvalidFormatFileException;
 import com.ezel.voza.domain.file.exception.NotAllowedFileException;
 import com.ezel.voza.domain.file.presentation.response.FileUploadResponse;
 import com.ezel.voza.domain.file.service.FileUploadService;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class FileUploadServiceImpl implements FileUploadService {
 

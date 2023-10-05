@@ -52,6 +52,7 @@ public class Group extends BaseTimeEntity {
     @Column(name = "tag")
     @Size(max = 3)
     @NotEmpty
+    @Builder.Default
     private Set<String> tags = new HashSet<>();
 
     @ElementCollection
@@ -60,6 +61,7 @@ public class Group extends BaseTimeEntity {
     @Column(name = "role")
     @NotEmpty
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 또는 다른 적절한 전략 선택
+    @Builder.Default
     private Map<User, String> members = new HashMap<>();
 
     @Column(name = "group_file_url")

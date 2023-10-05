@@ -1,18 +1,18 @@
 package com.ezel.voza.domain.calender.service.Impl;
 
-import com.ezel.voza.domain.calender.exception.CalenderAuthorMismatchException;
 import com.ezel.voza.domain.calender.entity.Calender;
+import com.ezel.voza.domain.calender.exception.CalenderAuthorMismatchException;
 import com.ezel.voza.domain.calender.repository.CalenderRepository;
 import com.ezel.voza.domain.calender.service.DeleteCalenderService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.CalenderUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class DeleteCalenderServiceImpl implements DeleteCalenderService {
 

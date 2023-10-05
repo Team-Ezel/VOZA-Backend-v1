@@ -6,15 +6,15 @@ import com.ezel.voza.domain.chat.presenation.dto.response.ChatListResponse;
 import com.ezel.voza.domain.chat.presenation.dto.response.ChatResponse;
 import com.ezel.voza.domain.chat.repository.RoomChatRepository;
 import com.ezel.voza.domain.chat.service.FindAllChatService;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.GroupUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 public class FindAllChatServiceImpl implements FindAllChatService {
 

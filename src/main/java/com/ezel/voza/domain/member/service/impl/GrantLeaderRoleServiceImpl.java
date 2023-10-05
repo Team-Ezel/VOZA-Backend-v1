@@ -5,14 +5,14 @@ import com.ezel.voza.domain.group.exception.NotExistGroupException;
 import com.ezel.voza.domain.member.exception.NotManagerException;
 import com.ezel.voza.domain.member.service.GrantLeaderRoleService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.GroupUtil;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class GrantLeaderRoleServiceImpl implements GrantLeaderRoleService {
 

@@ -3,11 +3,11 @@ package com.ezel.voza.domain.board.service.impl;
 import com.ezel.voza.domain.board.entity.Board;
 import com.ezel.voza.domain.board.presentation.dto.response.DetailBoardResponse;
 import com.ezel.voza.domain.board.service.GetBoardDetailService;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.BoardUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 public class GetBoardDetailServiceImpl implements GetBoardDetailService {
 

@@ -6,16 +6,16 @@ import com.ezel.voza.domain.group.presentation.dto.request.CreateGroupRequest;
 import com.ezel.voza.domain.group.repository.GroupRepository;
 import com.ezel.voza.domain.group.service.CreateGroupService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.HashSet;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class CreateGroupServiceImpl implements CreateGroupService {
 

@@ -6,14 +6,14 @@ import com.ezel.voza.domain.report.presentation.dto.request.CreateReportRequest;
 import com.ezel.voza.domain.report.repository.ReportRepository;
 import com.ezel.voza.domain.report.service.SendReportService;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.util.UserUtil;
 import com.ezel.voza.global.webhook.util.BotUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-@Service
+@ServiceWithTransactional
 @RequiredArgsConstructor
 public class SendReportServiceImpl implements SendReportService {
 

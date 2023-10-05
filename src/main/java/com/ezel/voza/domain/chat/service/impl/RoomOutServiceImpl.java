@@ -6,12 +6,11 @@ import com.ezel.voza.domain.chat.repository.RoomRepository;
 import com.ezel.voza.domain.chat.service.RoomOutService;
 import com.ezel.voza.domain.group.entity.Group;
 import com.ezel.voza.domain.user.entity.User;
-import com.ezel.voza.global.util.GroupUtil;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 public class RoomOutServiceImpl implements RoomOutService {
 

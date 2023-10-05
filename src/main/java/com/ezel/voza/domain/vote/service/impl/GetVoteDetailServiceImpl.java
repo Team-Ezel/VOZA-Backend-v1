@@ -4,11 +4,11 @@ import com.ezel.voza.domain.user.entity.User;
 import com.ezel.voza.domain.vote.entity.Vote;
 import com.ezel.voza.domain.vote.presentation.dto.response.DetailVoteResponse;
 import com.ezel.voza.domain.vote.service.GetVoteDetailService;
+import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.VoteUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
+@ReadOnlyService
 @RequiredArgsConstructor
 public class GetVoteDetailServiceImpl implements GetVoteDetailService {
 

@@ -36,6 +36,7 @@ public class VoteOption {
     @MapKeyJoinColumn(name = "user_id")
     @Column(name = "user")
     @NotEmpty
+    @Builder.Default
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Map<User, String> users = new HashMap<>();
 
