@@ -27,7 +27,6 @@ jobs:
 
             options:
               ports: "9088"
-              healthz: /healthing
               jarfile: voza.jar
               env:
                 - name: WEBHOOK_URL
