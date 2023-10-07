@@ -65,7 +65,7 @@ public class ReportTest {
     @WithMockUser("MockUser")
     @Test
     @DisplayName("리포트 생성 테스트")
-    void create_report() throws Exception {
+    void createReport() throws Exception {
 
         CreateReportRequest createReportRequest = new CreateReportRequest(
                 "test",
@@ -91,7 +91,7 @@ public class ReportTest {
     @Test
     @DisplayName("리포트 List 가져오기 테스트")
     @Order(1)
-    void list_report() throws Exception {
+    void listReport() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/admin/report/list")
@@ -105,7 +105,7 @@ public class ReportTest {
     @WithMockUser("MockUser")
     @Test
     @DisplayName("리포트 Detail 가져오기 테스트")
-    void report_detail() throws Exception {
+    void reportDetail() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/admin/report/26")
@@ -123,7 +123,7 @@ public class ReportTest {
     @Test
     @DisplayName("리포트 수락시 응답값 테스트")
     @Order(2)
-    void report_respond() throws Exception {
+    void reportRespond() throws Exception {
 
         //when 이걸 호출했을떄
         mockMvc.perform(MockMvcRequestBuilders
