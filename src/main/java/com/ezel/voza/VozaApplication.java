@@ -15,7 +15,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ConfigurationPropertiesScan
 @EnableJpaRepositories
 @EnableWebMvc
-@EnableJpaAuditing
 public class VozaApplication {
 
     public static void main(String[] args) {
