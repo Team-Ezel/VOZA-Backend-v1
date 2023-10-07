@@ -1,6 +1,5 @@
 package com.ezel.voza.domain.vote.presentation;
 
-import com.ezel.voza.domain.vote.presentation.dto.request.AddCountRequest;
 import com.ezel.voza.domain.vote.presentation.dto.request.CreateVoteRequest;
 import com.ezel.voza.domain.vote.presentation.dto.response.DetailVoteResponse;
 import com.ezel.voza.domain.vote.presentation.dto.response.ListVoteResponse;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("group/{group_id}/vote")
+@RequestMapping("group/{groupId}/vote")
 public class VoteController {
 
     private final CreateVoteService createVoteService;
@@ -27,32 +26,32 @@ public class VoteController {
     private final AddCountService addCountService;
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody @Valid CreateVoteRequest createVoteRequest, @PathVariable Long group_id) {
-        createVoteService.execute(createVoteRequest, group_id);
+    public ResponseEntity<Void> create(@RequestBody @Valid CreateVoteRequest createVoteRequest, @PathVariable Long groupId) {
+        createVoteService.execute(createVoteRequest, groupId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<ListVoteResponse> findAll(@PathVariable Long group_id) {
-        var list = listVoteService.execute(group_id);
+    public ResponseEntity<ListVoteResponse> findAll(@PathVariable Long groupId) {
+        var list = listVoteService.execute(groupId);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{vote_id}")
-    public ResponseEntity<Void> delete(@PathVariable Long vote_id) {
-        deleteVoteService.execute(vote_id);
+    @DeleteMapping("/{voteId}")
+    public ResponseEntity<Void> delete(@PathVariable Long voteId) {
+        deleteVoteService.execute(voteId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     
-    @GetMapping("/{vote_id}")
-    public ResponseEntity<DetailVoteResponse> findDetailOne(@PathVariable Long vote_id) {
-        DetailVoteResponse oneFindById = getVoteDetailService.execute(vote_id);
+    @GetMapping("/{voteId}")
+    public ResponseEntity<DetailVoteResponse> findDetailOne(@PathVariable Long voteId) {
+        DetailVoteResponse oneFindById = getVoteDetailService.execute(voteId);
         return new ResponseEntity<>(oneFindById, HttpStatus.OK);
     }
 
-    @PatchMapping("/{vote_id}")
-    public ResponseEntity<Void> addCount(@PathVariable Long vote_id, @RequestBody @Valid AddCountRequest addCountRequest) {
-        addCountService.execute(vote_id, addCountRequest);
+    @PatchMapping("/{voteId}/{optionId}")
+    public ResponseEntity<Void> addCount(@PathVariable Long voteId, @PathVariable Long optionId) {
+        addCountService.execute(voteId, optionId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
