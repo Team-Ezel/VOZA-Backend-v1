@@ -2,11 +2,10 @@ package com.ezel.voza.domain.vote.entity;
 
 import com.ezel.voza.domain.group.entity.Group;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -14,7 +13,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Vote {
+public class Vote extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +30,11 @@ public class Vote {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @CreatedDate
-    private LocalDateTime createdDate;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private Group group;
+
+    public void setVoteOptions(List<VoteOption> voteOptions) {
+        this.voteOptions = voteOptions;
+    }
 }
