@@ -1,6 +1,5 @@
 package com.ezel.voza.domain.vote.presentation.dto.request;
 
-import com.ezel.voza.domain.vote.entity.VoteOption;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AccessLevel;
@@ -19,5 +18,5 @@ public class CreateVoteRequest {
     private String title;
 
     @NotEmpty(message = "투표항목은 최소 한개이상 입력해야합니다.")
-    private List<VoteOption> options;
+    private List<String> options;
 }
