@@ -2,7 +2,6 @@ package com.ezel.voza.domain.vote.entity;
 
 import com.ezel.voza.domain.user.entity.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -35,7 +34,6 @@ public class VoteOption {
     @CollectionTable(name = "voted_user", joinColumns = @JoinColumn(name = "option_id"))
     @MapKeyJoinColumn(name = "user_id")
     @Column(name = "user")
-    @NotEmpty
     @Builder.Default
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Map<User, String> users = new HashMap<>();

@@ -28,14 +28,12 @@ public class ListVoteServiceImpl implements ListVoteService {
 
         List<Vote> votes = voteRepository.findAllByGroup(group);
 
-        ListVoteResponse listVoteResponse = ListVoteResponse.builder()
+        return ListVoteResponse.builder()
                 .voteList(
                         votes.stream()
                                 .map(VoteResponse::toResponse)
                                 .collect(Collectors.toList())
                 )
                 .build();
-
-        return listVoteResponse;
     }
 }
