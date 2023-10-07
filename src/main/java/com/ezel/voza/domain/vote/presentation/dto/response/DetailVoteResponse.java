@@ -1,6 +1,6 @@
 package com.ezel.voza.domain.vote.presentation.dto.response;
 
-import com.ezel.voza.domain.vote.entity.VoteOption;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +19,8 @@ public class DetailVoteResponse {
 
     private String author;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH-mm-ss")
     private LocalDateTime createdDate;
 
-    private List<VoteOption> voteOptions;
+    private List<VoteOptionResponse> voteOptions;
 }
