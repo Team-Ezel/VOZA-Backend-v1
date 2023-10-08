@@ -34,7 +34,19 @@ public class Vote extends BaseTimeEntity {
     @JoinColumn(name = "group_id")
     private Group group;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "voted_user",
+            joinColumns = @JoinColumn(name = "vote_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> votedUsers;
+
     public void setVoteOptions(List<VoteOption> voteOptions) {
         this.voteOptions = voteOptions;
+    }
+
+    public void putUser(User user) {
+        votedUsers.add(user);
     }
 }
