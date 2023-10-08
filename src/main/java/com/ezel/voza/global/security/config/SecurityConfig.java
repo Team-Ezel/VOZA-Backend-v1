@@ -1,5 +1,6 @@
 package com.ezel.voza.global.security.config;
 
+import com.ezel.voza.domain.user.entity.enums.Role;
 import com.ezel.voza.global.filter.JwtRequestFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -44,7 +45,7 @@ public class SecurityConfig {
                 .requestMatchers("/group/**").authenticated()
                 .requestMatchers("/group").authenticated()
                 .requestMatchers("/user/**").authenticated()
-                .requestMatchers("/admin/**").authenticated()
+                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers("/report/**").authenticated()
                 .requestMatchers("/ws/**").authenticated()
                 .requestMatchers("/sub/**").permitAll()
