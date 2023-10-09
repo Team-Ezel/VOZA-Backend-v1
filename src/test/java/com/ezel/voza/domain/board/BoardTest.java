@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -56,7 +55,6 @@ public class BoardTest {
     @WithMockUser("MockUser")
     @Test
     @DisplayName("게시판 생성 테스트")
-    @Order(1)
     void createBoard() throws Exception {
 
         CreateBoardRequest createBoardRequest = new CreateBoardRequest(
@@ -82,7 +80,6 @@ public class BoardTest {
     @WithMockUser("MockUser")
     @Test
     @DisplayName("게시판 리스트 테스트")
-    @Order(2)
     void listBoard() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -97,7 +94,6 @@ public class BoardTest {
     @WithMockUser("MockUser")
     @Test
     @DisplayName("게시판 디테일 테스트")
-    @Order(3)
     void boardDetail() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -114,7 +110,6 @@ public class BoardTest {
     @WithMockUser("MockUser")
     @Test
     @DisplayName("게시판 수정 테스트")
-    @Order(4)
     void boardUpdate() throws Exception {
 
         UpdateBoardRequest updateBoardRequest = new UpdateBoardRequest(
@@ -139,7 +134,6 @@ public class BoardTest {
     @WithMockUser("MockUser")
     @Test
     @DisplayName("게시판 삭제 테스트")
-    @Order(5)
     void boardDelete() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
