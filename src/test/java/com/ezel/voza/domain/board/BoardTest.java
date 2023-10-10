@@ -88,7 +88,9 @@ public class BoardTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         ).andDo(print())
-                .andExpect(jsonPath("$.boardList[*].title").isNotEmpty());
+                .andExpect(jsonPath("$.boardList[*].title").isNotEmpty())
+                .andExpect(jsonPath("$.boardList[*].author").isNotEmpty())
+                .andExpect(jsonPath("$.boardList[*].boardType").isNotEmpty());
     }
 
     @WithMockUser("MockUser")
