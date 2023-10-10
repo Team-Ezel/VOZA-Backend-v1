@@ -1,7 +1,9 @@
 package com.ezel.voza.domain.board;
 
+import com.ezel.voza.domain.board.entity.Board;
 import com.ezel.voza.domain.board.presentation.dto.request.CreateBoardRequest;
 import com.ezel.voza.domain.board.presentation.dto.request.UpdateBoardRequest;
+import com.ezel.voza.domain.board.repository.BoardRepository;
 import com.ezel.voza.domain.user.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -23,6 +25,9 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,6 +40,9 @@ public class BoardTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private BoardRepository boardRepository;
 
     @BeforeEach
     @DisplayName("테스트전 데이터 생성")
@@ -58,7 +66,7 @@ public class BoardTest {
     void createBoard() throws Exception {
 
         CreateBoardRequest createBoardRequest = new CreateBoardRequest(
-                "test title",
+                "test title check",
                 "test content",
                 "NORMAL"
         );
@@ -75,6 +83,8 @@ public class BoardTest {
                 .content(jsonRequest)
         ).andDo(print())
                 .andExpect(status().isCreated());
+
+        assertThat(boardRepository.findFirstByOrderByIdDesc().get().getTitle()).isEqualTo("test title check");
     }
 
     @WithMockUser("MockUser")
@@ -131,6 +141,8 @@ public class BoardTest {
                 .content(jsonRequest)
         ).andDo(print())
                 .andExpect(status().isOk());
+
+        assertThat(boardRepository.findById(1L).get().getTitle()).isEqualTo("updated title");
     }
 
     @WithMockUser("MockUser")
@@ -145,5 +157,8 @@ public class BoardTest {
                 .accept(MediaType.APPLICATION_JSON)
         ).andDo(print())
                 .andExpect(status().isNoContent());
+
+        Optional<Board> deletedBoard = boardRepository.findById(3L);
+        assertThat(deletedBoard).isEmpty();
     }
 }
