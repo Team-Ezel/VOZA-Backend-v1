@@ -5,6 +5,7 @@ import com.ezel.voza.domain.board.presentation.dto.request.CreateBoardRequest;
 import com.ezel.voza.domain.board.presentation.dto.request.UpdateBoardRequest;
 import com.ezel.voza.domain.board.repository.BoardRepository;
 import com.ezel.voza.domain.user.entity.User;
+import com.ezel.voza.global.util.GroupUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,7 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Optional;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -43,6 +44,9 @@ public class BoardTest {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private GroupUtil groupUtil;
 
     @BeforeEach
     @DisplayName("테스트전 데이터 생성")
@@ -84,7 +88,8 @@ public class BoardTest {
         ).andDo(print())
                 .andExpect(status().isCreated());
 
-        assertThat(boardRepository.findFirstByOrderByIdDesc().get().getTitle()).isEqualTo("test title check");
+        List<Board> boards = boardRepository.findALlByGroup(groupUtil.findGroupById(1L));
+        assertThat(boards.get(boards.size() - 1).getTitle()).isEqualTo("test title check");
     }
 
     @WithMockUser("MockUser")
@@ -151,14 +156,13 @@ public class BoardTest {
     void boardDelete() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/group/1/board/3")
+                .delete("/group/1/board/10")
                 .with(SecurityMockMvcRequestPostProcessors.user("MockUser"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
         ).andDo(print())
                 .andExpect(status().isNoContent());
 
-        Optional<Board> deletedBoard = boardRepository.findById(3L);
-        assertThat(deletedBoard).isEmpty();
+        assertThat(boardRepository.findById(10L)).isEmpty();
     }
 }
