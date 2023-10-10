@@ -2,7 +2,7 @@ name: Deploy to cloudtype
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
                 - name: REFRESH_SECRET
                   value: ${{ secrets.REFRESH_SECRET }}
                 - name: REDIRECT_URL
-                  value: http://localhost:9088/oauth2/kakao
+                  value: https://port-0-voza-koh2xljfbuiob.sel4.cloudtype.app/oauth2/kakao
                 - name: R_PORT
                   value: ${{ secrets.R_PORT }}
                 - name: R_HOST
