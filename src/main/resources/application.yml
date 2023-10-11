@@ -105,3 +105,13 @@ logging:
           socket:
             config:
               org.springframework.web.socket.config.WebSocketMessageBrokerStats: ERROR
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path:  "/admin"
+  endpoint:
+    health:
+      show-details: always
