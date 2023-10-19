@@ -49,6 +49,6 @@ public class ChatSaveServiceImpl implements ChatSaveService {
 
         if (!room.getGroup().getMembers().containsKey(user)) {
             throw new NotExistRoomUserException();
-        }
+        } 
     }
 }
