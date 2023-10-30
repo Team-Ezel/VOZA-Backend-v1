@@ -18,7 +18,7 @@ public class KickOutTimeUtil {
             case THREE_DAY_STOP -> 3 * 24 * 60 * 60; // 3일
             case SEVEN_DAY_STOP -> 7 * 24 * 60 * 60; // 7일
             case THIRTY_DAY_STOP -> 30 * 24 * 60 * 60; // 30일
-            case ALL_DAY_STOP -> Long.MAX_VALUE; // 무기한 추방
+            case PERMANENT_STOP -> Long.MAX_VALUE; // 무기한 추방
             default -> throw new InvaildFormatException();
         };
     }
