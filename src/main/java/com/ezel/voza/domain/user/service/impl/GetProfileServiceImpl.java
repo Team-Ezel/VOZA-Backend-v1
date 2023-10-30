@@ -25,7 +25,7 @@ public class GetProfileServiceImpl implements GetProfileService {
     public ProfileResponse execute() {
         User user = userUtil.currentUser();
 
-        List<Group> groupList = groupRepository.findGroupsByMembers(user);
+        List<Group> groupList = groupRepository.findGroupsByMember(user);
 
         return ProfileResponse.builder()
                 .email(user.getEmail())

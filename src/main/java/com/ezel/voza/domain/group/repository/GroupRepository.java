@@ -11,7 +11,7 @@ import java.util.List;
 public interface GroupRepository extends JpaRepository<Group, Long> {
 
     @Query("SELECT g FROM Group g INNER JOIN g.members m WHERE KEY(m) = :user")
-    List<Group> findGroupsByMembers(@Param("user") User user);
+    List<Group> findGroupsByMember(@Param("user") User user);
 
     List<Long> findGroupIdsByMembersContains(User currentUser);
 }

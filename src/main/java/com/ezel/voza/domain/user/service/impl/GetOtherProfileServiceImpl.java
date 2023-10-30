@@ -26,7 +26,7 @@ public class GetOtherProfileServiceImpl implements GetOtherProfileService {
 
         User user = userUtil.findUserById(userId);
 
-        List<Group> groupList = groupRepository.findGroupsByMembers(user);
+        List<Group> groupList = groupRepository.findGroupsByMember(user);
 
         return ProfileResponse.builder()
                 .email(user.getEmail())
