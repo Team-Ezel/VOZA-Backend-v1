@@ -5,7 +5,7 @@ import com.ezel.voza.domain.group.repository.GroupRepository;
 import com.ezel.voza.domain.user.entity.User;
 import com.ezel.voza.domain.user.presentation.dto.response.JoinedGroupResponse;
 import com.ezel.voza.domain.user.presentation.dto.response.ProfileResponse;
-import com.ezel.voza.domain.user.service.GetProfileService;
+import com.ezel.voza.domain.user.service.GetOtherProfileService;
 import com.ezel.voza.global.annotation.ReadOnlyService;
 import com.ezel.voza.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,15 +15,16 @@ import java.util.stream.Collectors;
 
 @ReadOnlyService
 @RequiredArgsConstructor
-public class GetProfileServiceImpl implements GetProfileService {
-
-    private final UserUtil userUtil;
+public class GetOtherProfileServiceImpl implements GetOtherProfileService {
 
     private final GroupRepository groupRepository;
 
+    private final UserUtil userUtil;
+
     @Override
-    public ProfileResponse execute() {
-        User user = userUtil.currentUser();
+    public ProfileResponse execute(Long userId) {
+
+        User user = userUtil.findUserById(userId);
 
         List<Group> groupList = groupRepository.findGroupsByMember(user);
 
