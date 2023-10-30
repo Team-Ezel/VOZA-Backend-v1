@@ -10,6 +10,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class JoinedGroupResponse {
 
+    private Long groupId;
+
     private String groupName;
 
     private String groupFileUrl;
@@ -17,6 +19,7 @@ public class JoinedGroupResponse {
     public static JoinedGroupResponse toResponse(Group group) {
 
         return JoinedGroupResponse.builder()
+                .groupId(group.getGroupId())
                 .groupName(group.getGroupName())
                 .groupFileUrl(group.getUrl())
                 .build();
