@@ -24,7 +24,7 @@ public class MyGroupListServiceImpl implements GroupListService {
     @Override
     public GroupListResponse execute() {
 
-        List<Group> groupList = groupRepository.findGroupsByMembers(util.currentUser());
+        List<Group> groupList = groupRepository.findGroupsByMember(util.currentUser());
 
         return GroupListResponse.builder()
                 .groupList(

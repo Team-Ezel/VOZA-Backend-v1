@@ -35,7 +35,7 @@ public class NotContainsGroupServiceImpl implements OtherGroupListService {
         User currentUser = util.currentUser();
 
         // 자신이 속한 그룹 목록을 가져옵니다.
-        List<Group> userGroups = groupRepository.findGroupsByMembers(currentUser);
+        List<Group> userGroups = groupRepository.findGroupsByMember(currentUser);
 
         // 모든 그룹을 가져옵니다.
         List<Group> allGroups = queryFactory
