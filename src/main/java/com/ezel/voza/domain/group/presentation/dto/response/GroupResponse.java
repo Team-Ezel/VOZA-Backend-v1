@@ -4,6 +4,7 @@ import com.ezel.voza.domain.group.entity.Group;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import java.util.Set;
 
 @Getter
 @Builder
@@ -18,6 +19,8 @@ public class GroupResponse {
 
     private String leaderName;
 
+    private Set<String> tags;
+
     private Integer members;
 
     public static GroupResponse groupResponse(Group group) {
@@ -28,6 +31,7 @@ public class GroupResponse {
                 .url(group.getUrl())
                 .leaderName(group.getLeaderName())
                 .members(group.getMembers().size())
+                .tags(group.getTags())
                 .build();
     }
 }
