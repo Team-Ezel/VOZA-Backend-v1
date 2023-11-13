@@ -11,8 +11,8 @@ public class KickOutTimeUtil {
 
     public static long getSeconds(KickOutTime kickOutTime) {
 
-        final int SECONDS_IN_AN_HOUR = 60 * 60;
-        final int SECONDS_IN_A_DAY = 24 * SECONDS_IN_AN_HOUR;
+        final long SECONDS_IN_AN_HOUR = 60 * 60;
+        final long SECONDS_IN_A_DAY = 24 * SECONDS_IN_AN_HOUR;
 
         return switch (kickOutTime) {
             case FIVE_HOUR_STOP -> 5 * SECONDS_IN_AN_HOUR;
