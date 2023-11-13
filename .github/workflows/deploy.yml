@@ -27,7 +27,6 @@ jobs:
 
             options:
               ports: "9088"
-              jarfile: voza.jar
               env:
                 - name: WEBHOOK_URL
                   value: ${{ secrets.WEBHOOK_URL }}
