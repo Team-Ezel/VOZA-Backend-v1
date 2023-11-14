@@ -17,10 +17,10 @@ public class CheckBlackMemberScheduledImpl implements CheckBlackMemberScheduled 
     private final BlackMemberRepository blackMemberRepository;
 
     @Override
-    @Scheduled(fixedRate = 60000) // 1분마다 실행
+    @Scheduled(fixedRate = 5 * 60 * 60 * 1000) // 5시간 마다 실행
     public void execute() {
 
-        List<BlackMember> blackMemberList = blackMemberRepository.findAll();
+        List<BlackMember> blackMemberList = blackMemberRepository.findAllEntityGraph();
 
         LocalDateTime currentTime = LocalDateTime.now();
 
