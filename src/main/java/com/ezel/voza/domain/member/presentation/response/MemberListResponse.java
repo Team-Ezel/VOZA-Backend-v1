@@ -11,5 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MemberListResponse {
 
+    private boolean leaderCheck;
+
     private List<MemberResponse> memberResponses;
 }
