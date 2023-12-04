@@ -21,6 +21,7 @@ public class KickOutTimeUtil {
             case ONE_DAY_STOP -> SECONDS_IN_A_DAY;
             case THREE_DAY_STOP -> 3 * SECONDS_IN_A_DAY;
             case SEVEN_DAY_STOP -> 7 * SECONDS_IN_A_DAY;
+            case TWELVE_DAY_STOP -> 12 * SECONDS_IN_A_DAY;
             case THIRTY_DAY_STOP -> 30 * SECONDS_IN_A_DAY;
             case PERMANENT_STOP -> Long.MAX_VALUE;
             default -> throw new InvaildFormatException();
