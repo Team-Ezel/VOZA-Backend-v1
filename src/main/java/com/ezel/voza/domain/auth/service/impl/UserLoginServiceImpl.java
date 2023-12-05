@@ -41,7 +41,8 @@ public class UserLoginServiceImpl implements UserLoginService {
         return LoginResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
-                .AccessExpiredAt(tokenProvider.accessExpiredTime())
+                .accessExpiredAt(tokenProvider.accessExpiredTime())
+                .refreshExpiredAt(tokenProvider.refreshExpiredTime())
                 .build();
     }
 }
