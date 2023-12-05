@@ -24,7 +24,7 @@ public class ReIssueTokenServiceImpl implements ReIssueTokenService {
 
         String refresh = tokenProvider.parseToken(refreshToken);
 
-        if (refresh == null) {
+        if (!refreshTokenRepository.findByRefreshToken(refresh)) {
             throw new TokenNotVaildException();
         }
 
