@@ -1,6 +1,5 @@
 package com.ezel.voza.global.security.config;
 
-import com.ezel.voza.domain.user.entity.enums.Role;
 import com.ezel.voza.global.filter.JwtRequestFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -52,6 +51,7 @@ public class SecurityConfig {
                 .requestMatchers("/pub/**").permitAll()
                 .requestMatchers("/room/**").authenticated()
                 .requestMatchers("/file/**").authenticated()
+                .requestMatchers("/auth").authenticated()
                 .anyRequest().denyAll();
         http
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
