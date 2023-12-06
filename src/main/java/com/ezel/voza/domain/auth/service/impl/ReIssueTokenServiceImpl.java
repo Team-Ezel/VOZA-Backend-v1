@@ -7,6 +7,9 @@ import com.ezel.voza.domain.auth.service.ReIssueTokenService;
 import com.ezel.voza.global.annotation.ServiceWithTransactional;
 import com.ezel.voza.global.security.exception.TokenNotVaildException;
 import com.ezel.voza.global.security.jwt.TokenProvider;
+import com.ezel.voza.global.security.jwt.properties.JwtProperties;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 
 import java.time.ZonedDateTime;
@@ -19,14 +22,14 @@ public class ReIssueTokenServiceImpl implements ReIssueTokenService {
 
     private final TokenProvider tokenProvider;
 
+    private final JwtProperties jwtProperties;
+
     @Override
     public NewTokenResponse execute(String refreshToken) {
 
         String refresh = tokenProvider.parseToken(refreshToken);
 
-        if (!refreshTokenRepository.findByRefreshToken(refresh)) {
-            throw new TokenNotVaildException();
-        }
+        validateRefreshToken(refresh);
 
         String email = tokenProvider.exactEmailFromRefreshToken(refresh);
 
@@ -49,4 +52,24 @@ public class ReIssueTokenServiceImpl implements ReIssueTokenService {
                 .refreshExp(refreshExp)
                 .build();
     }
+
+    private void validateRefreshToken(String refreshToken) {
+
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(jwtProperties.getRefreshSecret())
+                    .build()
+                    .parseClaimsJws(refreshToken)
+                    .getBody();
+        } catch (Exception e) {
+            throw new TokenNotVaildException();
+        }
+
+        RefreshToken token = refreshTokenRepository.findByRefreshToken(refreshToken);
+
+        if (token == null) {
+            throw new TokenNotVaildException();
+        }
+    }
 }
+
