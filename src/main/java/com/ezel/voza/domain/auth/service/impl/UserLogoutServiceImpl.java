@@ -1,32 +1,36 @@
 package com.ezel.voza.domain.auth.service.impl;
 
-import com.ezel.voza.domain.auth.exception.UserNotFoundException;
+import com.ezel.voza.domain.auth.entity.RefreshToken;
 import com.ezel.voza.domain.auth.repository.RefreshTokenRepository;
 import com.ezel.voza.domain.auth.service.UserLogoutService;
-import com.ezel.voza.domain.user.entity.User;
 import com.ezel.voza.global.annotation.ServiceWithTransactional;
-import com.ezel.voza.global.util.UserUtil;
+import com.ezel.voza.global.redis.util.RedisUtil;
+import com.ezel.voza.global.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 
 @ServiceWithTransactional
 @RequiredArgsConstructor
 public class UserLogoutServiceImpl implements UserLogoutService {
 
-    private final UserUtil userUtil;
-
     private final RefreshTokenRepository refreshTokenRepository;
 
+    private final TokenProvider tokenProvider;
+
+    private final RedisUtil redisUtil;
+
     @Override
-    public void execute() {
+    public void execute(String accessToken, String refreshToken) {
 
-        User user = userUtil.currentUser();
+        String access = tokenProvider.parseToken(accessToken);
 
-        refreshTokenRepository.findById(user.getEmail())
-                .ifPresentOrElse(
-                        refreshTokenRepository::delete,
-                        () -> {
-                            throw new UserNotFoundException();
-                        }
-                );
+        String refresh = tokenProvider.parseToken(refreshToken);
+
+        RefreshToken userRefreshToken = refreshTokenRepository.findByRefreshToken(refresh);
+
+        refreshTokenRepository.delete(userRefreshToken);
+
+        Long expiration = tokenProvider.getExpiration(access);
+
+        redisUtil.setBlackList(access, "logout", expiration);
     }
 }
