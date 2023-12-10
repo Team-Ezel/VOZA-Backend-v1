@@ -1,5 +1,7 @@
 package com.ezel.voza.global.filter;
 
+import com.ezel.voza.global.redis.util.RedisUtil;
+import com.ezel.voza.global.security.exception.TokenExpiredException;
 import com.ezel.voza.global.security.jwt.TokenProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,6 +23,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final TokenProvider tokenProvider;
 
+    private final RedisUtil redisUtil;
+
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -31,6 +35,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String token = tokenProvider.resolveToken(request);
 
         if (token != null && !token.isBlank()) {
+
+            if (redisUtil.hasKeyBlackList(token)) {
+                throw new TokenExpiredException();
+            }
 
             Authentication authentication = tokenProvider.authentication(token);
 
