@@ -1,6 +1,5 @@
 package com.ezel.voza.global.security.jwt;
 
-import com.ezel.voza.global.redis.util.RedisUtil;
 import com.ezel.voza.global.security.jwt.properties.JwtProperties;
 import com.ezel.voza.global.security.jwt.properties.TokenTimeProperties;
 import io.jsonwebtoken.*;
@@ -29,7 +28,6 @@ public class TokenProvider {
     private final UserDetailsService userDetailsService;
     private final TokenTimeProperties tokenTimeProperties;
     private final JwtProperties jwtProperties;
-    private final RedisUtil redisUtil;
 
     @AllArgsConstructor
     private enum TokenObject {
@@ -119,10 +117,6 @@ public class TokenProvider {
     private Claims getTokenBody(String token, Key secret) {
 
         try {
-
-            if (redisUtil.hasKeyBlackList(token)) {
-                throw new TokenNotVaildException();
-            }
 
             return Jwts.parserBuilder()
                     .setSigningKey(secret)
