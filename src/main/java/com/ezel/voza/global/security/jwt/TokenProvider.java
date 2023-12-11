@@ -105,6 +105,15 @@ public class TokenProvider {
         }
     }
 
+    public Long getExpiration(String token) {
+
+        Date expiration = Jwts.parserBuilder().setSigningKey(jwtProperties.getAccessSecret()).build().parseClaimsJws(token).getBody().getExpiration();
+
+        long now = new Date().getTime();
+
+        return (expiration.getTime() - now);
+    }
+
     private Claims getTokenBody(String token, Key secret) {
 
         try {
